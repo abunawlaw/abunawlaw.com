@@ -1,0 +1,50 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  lang?: 'en' | 'fr';
+}
+const {
+  title,
+  description = 'Abunaw & Associates is a Cameroonian law firm advising companies, lenders and families from Douala and Buea, in English and French.',
+  lang = 'en',
+} = Astro.props;
+const fullTitle = title ? `${title} | Abunaw & Associates` : 'Abunaw & Associates | Advocates and legal consultants, Douala · Buea';
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const baseUrl = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en" href={new URL(baseUrl, Astro.site)} />
+    <link rel="alternate" hreflang="fr" href={new URL(`${baseUrl}fr/`, Astro.site)} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@300;400;500&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{lang === 'fr' ? 'Aller au contenu' : 'Skip to content'}</a>
+    <Header lang={lang} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <script>
+      import '../scripts/reveal.js';
+    </script>
+  </body>
+</html>

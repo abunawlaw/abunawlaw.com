@@ -1,0 +1,93 @@
+---
+interface Props { lang?: 'en' | 'fr' }
+const { lang = 'en' } = Astro.props;
+const fr = lang === 'fr';
+
+const links = [
+  { href: '/practices/', en: 'Practices', fr: 'Domaines' },
+  { href: '/people/', en: 'People', fr: 'Équipe' },
+  { href: '/about/', en: 'About', fr: 'Le cabinet' },
+  { href: '/insights/', en: 'Insights', fr: 'Publications' },
+  { href: '/careers/', en: 'Careers', fr: 'Carrières' },
+];
+---
+<header class="site-header">
+  <div class="bar">
+    <a href={fr ? '/fr/' : '/'} class="brand">Abunaw <span>&amp;</span> Associates</a>
+    <div class="right">
+      <nav class="nav" id="site-nav" aria-label={fr ? 'Navigation principale' : 'Main'}>
+        {links.map((l) => <a href={l.href}>{fr ? l.fr : l.en}</a>)}
+        <a href="/contact/" class="contact">Contact</a>
+      </nav>
+      <div class="lang">
+        <a href="/" lang="en" aria-current={fr ? undefined : 'true'} class:list={[{ on: !fr }]}>EN</a>
+        <span aria-hidden="true">/</span>
+        <a href="/fr/" lang="fr" aria-current={fr ? 'true' : undefined} class:list={[{ on: fr }]}>FR</a>
+      </div>
+      <button class="burger" type="button" aria-controls="site-nav" aria-expanded="false" aria-label={fr ? 'Menu' : 'Open menu'}>
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+{fr && (
+  <div class="fr-notice">
+    <div>La version française complète du site est en cours de préparation. La navigation et la page d’accueil sont disponibles en français ; les pages détaillées restent en anglais. Toute demande peut être adressée en français.</div>
+  </div>
+)}
+
+<script>
+  const btn = document.querySelector<HTMLButtonElement>('.burger');
+  const header = document.querySelector('.site-header');
+  btn?.addEventListener('click', () => {
+    const open = btn.getAttribute('aria-expanded') !== 'true';
+    btn.setAttribute('aria-expanded', String(open));
+    header?.classList.toggle('open', open);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && header?.classList.contains('open')) {
+      header.classList.remove('open');
+      btn?.setAttribute('aria-expanded', 'false');
+      btn?.focus();
+    }
+  });
+</script>
+
+<style>
+  .site-header { position: sticky; top: 0; z-index: 50; background: var(--white); border-bottom: 1px solid var(--rule); }
+  .bar { max-width: 1360px; margin: 0 auto; padding: 0 var(--gutter); height: var(--header-h); display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .brand { font-family: var(--font-display); font-size: 19px; font-weight: 400; letter-spacing: 0.06em; color: var(--ink); text-transform: uppercase; white-space: nowrap; }
+  .brand:hover { text-decoration: none; color: var(--ink); }
+  .brand span { color: var(--accent); }
+  .right { display: flex; align-items: center; gap: clamp(14px, 2.2vw, 32px); }
+  .nav { display: flex; align-items: center; gap: clamp(14px, 2.2vw, 30px); }
+  .nav a { font-size: 13.5px; font-weight: 500; letter-spacing: 0.04em; color: var(--ink); white-space: nowrap; }
+  .nav a.contact { border: 1px solid rgba(0, 23, 31, 0.22); padding: 9px 16px; }
+  .nav a.contact:hover { text-decoration: none; border-color: var(--ink); }
+  .lang { display: flex; align-items: center; gap: 8px; border-left: 1px solid var(--rule); padding-left: clamp(12px, 2vw, 24px); font-size: 12px; }
+  .lang a { font-weight: 600; letter-spacing: 0.1em; color: var(--disabled); }
+  .lang a.on { color: var(--ink); }
+  .lang span { color: rgba(0, 23, 31, 0.3); }
+  .burger { display: none; background: none; border: 0; padding: 10px 4px; cursor: pointer; width: 34px; }
+  .burger span { display: block; height: 1.5px; background: var(--ink); transition: transform 200ms ease; }
+  .burger span + span { margin-top: 7px; }
+  .fr-notice { background: var(--ink); color: var(--white); }
+  .fr-notice div { max-width: 1360px; margin: 0 auto; padding: 12px var(--gutter); font-size: 13px; line-height: 1.5; }
+
+  @media (max-width: 900px) {
+    .burger { display: block; }
+    .nav { display: none; position: absolute; left: 0; right: 0; top: var(--header-h); background: var(--white); border-bottom: 1px solid var(--rule); flex-direction: column; align-items: stretch; gap: 0; padding: 8px var(--gutter) 24px; }
+    .nav a { font-size: 17px; padding: 14px 0; border-top: 1px solid var(--rule); }
+    .nav a:first-child { border-top: 0; }
+    .nav a.contact { margin-top: 12px; text-align: center; border: 1px solid rgba(0, 23, 31, 0.22); }
+    .site-header.open .nav { display: flex; }
+    .site-header.open .burger span:first-child { transform: translateY(4.25px) rotate(45deg); }
+    .site-header.open .burger span:last-child { transform: translateY(-4.25px) rotate(-45deg); }
+  }
+  @media (max-width: 480px) {
+    .bar { gap: 12px; }
+    .brand { font-size: 15px; letter-spacing: 0.04em; }
+    .right { gap: 12px; }
+    .lang { padding-left: 12px; gap: 6px; }
+  }
+</style>

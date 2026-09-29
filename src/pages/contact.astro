@@ -1,0 +1,119 @@
+---
+import Base from '../layouts/Base.astro';
+
+// Formspree form endpoint. Replace FORM_ID with the firm's form ID from formspree.io.
+const FORM_ENDPOINT = 'https://formspree.io/f/FORM_ID';
+---
+<Base title="Contact" description="Contact Abunaw & Associates in Douala and Buea. Enquiries in English or French.">
+<div>
+  <section style="max-width:1360px;margin:0 auto;padding:clamp(48px,7vw,104px) clamp(20px,5vw,80px) clamp(32px,4vw,48px)">
+    <div style="font-size:11px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:#007EA7;margin-bottom:28px">Contact</div>
+    <h1 style="font-family:Spectral,Georgia,serif;font-weight:300;font-size:clamp(36px,5vw,64px);line-height:1.08;letter-spacing:-0.02em;margin:0;max-width:20ch">Three offices, two languages</h1>
+    <p style="font-size:17px;line-height:1.7;color:#38484f;max-width:64ch;margin:28px 0 0">Enquiries may be made in English or French. / Les demandes peuvent être adressées en anglais ou en français.</p>
+  </section>
+  <hr style="border:0;border-top:1px solid rgba(0,23,31,0.14);margin:0" />
+  <section style="max-width:1360px;margin:0 auto;padding:clamp(40px,5vw,64px) clamp(20px,5vw,80px)">
+    <div class="grid-3" style="display:grid;gap:clamp(28px,3vw,44px)">
+      <div style="border-top:2px solid #00171F;padding-top:20px">
+        <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:24px;margin:0 0 6px">Douala</h2>
+        <div style="font-size:13px;color:#007EA7;margin-bottom:16px">Head office</div>
+        <p style="margin:0;font-family:ui-monospace,Menlo,monospace;font-size:13.5px;line-height:1.85;color:#6b7b82">[Building, street]<br />[Quarter, Douala]<br />[Postal box]<br />[+237 telephone]</p>
+      </div>
+      <div style="border-top:1px solid rgba(0,23,31,0.2);padding-top:20px">
+        <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:24px;margin:0 0 6px">Buea</h2>
+        <div style="font-size:13px;color:#4a5a61;margin-bottom:16px">Southwest Region</div>
+        <p style="margin:0;font-family:ui-monospace,Menlo,monospace;font-size:13.5px;line-height:1.85;color:#6b7b82">[Building, street]<br />[Quarter, Buea]<br />[Postal box]<br />[+237 telephone]</p>
+      </div>
+      <div style="border-top:1px solid rgba(0,23,31,0.2);padding-top:20px">
+        <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:24px;margin:0 0 16px">Our lawyers</h2>
+        <div style="display:grid;gap:14px;font-size:14.5px;line-height:1.5">
+          <div><div style="color:#00171F">Francisca E. Abunaw</div><a href="mailto:francisca.abunaw@abunawlaw.com">francisca.abunaw@abunawlaw.com</a></div>
+          <div><div style="color:#00171F">Orock Kelly Agbor</div><a href="mailto:kelly.orock@abunawlaw.com">kelly.orock@abunawlaw.com</a></div>
+          <div><div style="color:#00171F">Orock Donaldson Agbor</div><a href="mailto:donaldson.agbor@abunawlaw.com">donaldson.agbor@abunawlaw.com</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <hr style="border:0;border-top:1px solid rgba(0,23,31,0.14);margin:0" />
+  <section style="max-width:1360px;margin:0 auto;padding:clamp(40px,5vw,72px) clamp(20px,5vw,80px) clamp(56px,7vw,96px)">
+    <div style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(28px,3vw,48px)">
+      <div style="grid-column:span 4;min-width:240px">
+        <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(24px,2.6vw,32px);line-height:1.2;margin:0 0 22px;max-width:16ch">Make an enquiry</h2>
+        <div style="border-top:1px solid rgba(0,23,31,0.16);padding-top:16px">
+          <h3 style="font-size:13px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;margin:0 0 10px">Before you write</h3>
+          <p style="margin:0 0 14px;font-size:14.5px;line-height:1.7;color:#4a5a61">Sending this form does not create a lawyer-client relationship, and the firm owes you no duty until we have completed a conflict check and confirmed our engagement in writing.</p>
+          <p style="margin:0;font-size:14.5px;line-height:1.7;color:#4a5a61">Please do not send confidential or time-sensitive information in a first enquiry. Give us enough to identify the parties and run the conflict check, and no more.</p>
+        </div>
+      </div>
+      <form id="enquiry" action={FORM_ENDPOINT} method="POST" novalidate style="grid-column:span 7;min-width:280px;display:grid;gap:22px">
+        <input type="hidden" name="_subject" value="New website enquiry" />
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px" />
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:22px">
+          <label style="display:grid;gap:8px"><span style="font-size:13px;font-weight:500;letter-spacing:0.04em;color:#00171F">Name <span aria-hidden="true">*</span></span><input type="text" name="name" id="f-name" aria-describedby="err-name" required autocomplete="name" style="border:0;border-bottom:1px solid rgba(0,23,31,0.3);padding:10px 0;font-size:15.5px;color:#00171F;background:none;outline:none" /><span class="field-error" id="err-name" aria-live="polite"></span></label>
+          <label style="display:grid;gap:8px"><span style="font-size:13px;font-weight:500;letter-spacing:0.04em;color:#00171F">Organisation</span><input type="text" name="organisation" id="f-organisation" aria-describedby="err-organisation" autocomplete="organization" style="border:0;border-bottom:1px solid rgba(0,23,31,0.3);padding:10px 0;font-size:15.5px;color:#00171F;background:none;outline:none" /><span class="field-error" id="err-organisation" aria-live="polite"></span></label>
+          <label style="display:grid;gap:8px"><span style="font-size:13px;font-weight:500;letter-spacing:0.04em;color:#00171F">Email <span aria-hidden="true">*</span></span><input type="email" name="email" id="f-email" aria-describedby="err-email" required autocomplete="email" style="border:0;border-bottom:1px solid rgba(0,23,31,0.3);padding:10px 0;font-size:15.5px;color:#00171F;background:none;outline:none" /><span class="field-error" id="err-email" aria-live="polite"></span></label>
+          <label style="display:grid;gap:8px"><span style="font-size:13px;font-weight:500;letter-spacing:0.04em;color:#00171F">Telephone</span><input type="tel" name="telephone" id="f-telephone" aria-describedby="err-telephone" autocomplete="tel" style="border:0;border-bottom:1px solid rgba(0,23,31,0.3);padding:10px 0;font-size:15.5px;color:#00171F;background:none;outline:none" /><span class="field-error" id="err-telephone" aria-live="polite"></span></label>
+          <label style="display:grid;gap:8px"><span style="font-size:13px;font-weight:500;letter-spacing:0.04em;color:#00171F">Preferred language</span><select name="language" id="f-language" style="border:0;border-bottom:1px solid rgba(0,23,31,0.3);padding:10px 0;font-size:15.5px;color:#00171F;background:none;outline:none"><option>English</option><option>Français</option></select><span class="field-error" id="err-language" aria-live="polite"></span></label>
+          <label style="display:grid;gap:8px"><span style="font-size:13px;font-weight:500;letter-spacing:0.04em;color:#00171F">Practice area</span><select name="practice_area" id="f-practice_area" style="border:0;border-bottom:1px solid rgba(0,23,31,0.3);padding:10px 0;font-size:15.5px;color:#00171F;background:none;outline:none"><option>Corporate &amp; Commercial</option><option>Corporate Compliance &amp; Governance</option><option>Succession &amp; Probate</option><option>Real Estate &amp; Land Law</option><option>Labour &amp; Employment Law</option><option>Family Law</option><option>Criminal Litigation</option><option>Human Rights Law</option><option>Consumer Protection</option><option>Legal Translation</option><option>Other</option></select><span class="field-error" id="err-practice_area" aria-live="polite"></span></label>
+        </div>
+        <label style="display:grid;gap:8px"><span style="font-size:13px;font-weight:500;letter-spacing:0.04em;color:#00171F">Other parties involved — required for the conflict check <span aria-hidden="true">*</span></span><input type="text" name="other_parties" id="f-other_parties" aria-describedby="err-other_parties" required placeholder="Counterparties, related companies or opposing parties" style="border:0;border-bottom:1px solid rgba(0,23,31,0.3);padding:10px 0;font-size:15.5px;color:#00171F;background:none;outline:none" /><span class="field-error" id="err-other_parties" aria-live="polite"></span></label>
+        <label style="display:grid;gap:8px"><span style="font-size:13px;font-weight:500;letter-spacing:0.04em;color:#00171F">Your enquiry</span><textarea name="enquiry" id="f-enquiry" rows="5" style="border:1px solid rgba(0,23,31,0.3);padding:12px;font-size:15.5px;line-height:1.6;color:#00171F;background:none;outline:none;resize:vertical"></textarea><span class="field-error" id="err-enquiry" aria-live="polite"></span></label>
+        <div style="display:grid;gap:6px">
+          <label style="display:flex;gap:12px;align-items:flex-start"><input type="checkbox" name="acknowledgment" id="f-acknowledgment" value="Acknowledged" required aria-describedby="err-acknowledgment" style="margin-top:4px;width:16px;height:16px;accent-color:#007EA7;flex:none" /><span style="font-size:14px;line-height:1.65;color:#4a5a61;max-width:62ch">I understand that sending this enquiry does not create a lawyer-client relationship, that the firm must complete a conflict check before accepting instructions, and that I should not send confidential information at this stage.</span></label>
+          <span class="field-error" id="err-acknowledgment" aria-live="polite"></span>
+        </div>
+        <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+          <button type="submit" style="background:#00171F;color:#FFFFFF;border:0;padding:14px 28px;cursor:pointer;font-size:14px;font-weight:500;letter-spacing:0.04em">Send enquiry</button>
+          <span id="form-status" role="status" style="font-size:14px;color:#007EA7"></span>
+        </div>
+        <p style="margin:0;font-size:12.5px;color:#6b7b82">* Required</p>
+      </form>
+    </div>
+  </section>
+</div>
+</Base>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('#enquiry')!;
+  const status = document.querySelector<HTMLElement>('#form-status')!;
+  const messages: Record<string, string> = {
+    name: 'Please enter your name.',
+    email: 'Please enter a valid email address.',
+    other_parties: 'Please list the other parties so we can run a conflict check (write “None” if there are none).',
+    acknowledgment: 'Please confirm you have read the notice above.',
+  };
+
+  function check(el: HTMLInputElement) {
+    const err = document.getElementById(`err-${el.name}`);
+    const ok = el.checkValidity() && (el.type === 'checkbox' || !el.required || el.value.trim() !== '');
+    el.setAttribute('aria-invalid', String(!ok));
+    if (err) err.textContent = ok ? '' : messages[el.name] ?? 'This field is required.';
+    return ok;
+  }
+
+  const required = [...form.querySelectorAll<HTMLInputElement>('[required]')];
+  required.forEach((el) => el.addEventListener(el.type === 'checkbox' ? 'change' : 'blur', () => check(el)));
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    status.style.color = '#007EA7';
+    status.textContent = '';
+    const invalid = required.filter((el) => !check(el));
+    if (invalid.length) { invalid[0].focus(); return; }
+
+    const button = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    button.disabled = true;
+    status.textContent = 'Sending…';
+    try {
+      const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+      if (!res.ok) throw new Error(String(res.status));
+      form.reset();
+      status.textContent = 'Thank you. Your enquiry has been sent, and the firm will reply once the conflict check is complete.';
+    } catch {
+      status.style.color = '#b3261e';
+      status.textContent = 'Sorry, your enquiry could not be sent. Please try again, or email one of our lawyers directly.';
+    } finally {
+      button.disabled = false;
+    }
+  });
+</script>

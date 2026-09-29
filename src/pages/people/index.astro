@@ -1,0 +1,39 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import francisca from '../../assets/people/francisca-abunaw.png';
+import kelly from '../../assets/people/kelly-agbor.jpeg';
+import donaldson from '../../assets/people/donaldson-agbor.jpeg';
+---
+<Base title="People" description="Advocates admitted in Cameroon and Nigeria, practising from Douala and Buea.">
+<div>
+  <section style="max-width:1360px;margin:0 auto;padding:clamp(48px,7vw,104px) clamp(20px,5vw,80px) clamp(32px,4vw,48px)">
+    <div style="font-size:11px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:#007EA7;margin-bottom:28px">People</div>
+    <h1 style="font-family:Spectral,Georgia,serif;font-weight:300;font-size:clamp(36px,5vw,64px);line-height:1.08;letter-spacing:-0.02em;margin:0;max-width:20ch">Our lawyers</h1>
+    <p style="font-size:16.5px;line-height:1.7;color:#38484f;max-width:64ch;margin:28px 0 0">Advocates admitted in Cameroon and Nigeria, practising from Douala and Buea.</p>
+  </section>
+  <hr style="border:0;border-top:1px solid rgba(0,23,31,0.14);margin:0" />
+  <section style="max-width:1360px;margin:0 auto;padding:clamp(40px,5vw,64px) clamp(20px,5vw,80px) clamp(56px,7vw,96px)">
+    <div class="grid-people" style="display:grid;gap:clamp(28px,3vw,44px)">
+      <a href="/people/francisca-abunaw/" class="card" data-reveal="1" style="text-align:left;background:none;border:0;padding:0;cursor:pointer">
+        <div style="position:relative;aspect-ratio:4/5;background:#e7ebed;overflow:hidden;margin-bottom:16px"><Image src={francisca} alt="Francisca E. Abunaw" width={1200} style="width:100%;height:100%;object-fit:cover;object-position:50% 20%;filter:grayscale(1) contrast(1.06) brightness(0.98)" /></div>
+        <h3 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:20px;margin:0 0 6px;color:#00171F">Francisca E. Abunaw</h3>
+        <div style="font-size:13.5px;color:#4a5a61;line-height:1.6">Managing Partner<br />Douala</div>
+        <div style="font-size:13px;font-weight:500;color:#007EA7;margin-top:10px">View profile</div>
+      </a>
+      <a href="/people/kelly-agbor/" class="card" data-reveal="1" style="text-align:left;background:none;border:0;padding:0;cursor:pointer">
+        <div style="position:relative;aspect-ratio:4/5;background:#e7ebed;overflow:hidden;margin-bottom:16px"><Image src={kelly} alt="Orock Kelly Agbor" width={1200} style="width:100%;height:100%;object-fit:cover;object-position:51% 0%;filter:grayscale(1) contrast(1.06) brightness(0.98)" /></div>
+        <h3 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:20px;margin:0 0 6px;color:#00171F">Orock Kelly Agbor</h3>
+        <div style="font-size:13.5px;color:#4a5a61;line-height:1.6">Associate<br />Buea</div>
+        <div style="font-size:13px;font-weight:500;color:#007EA7;margin-top:10px">View profile</div>
+      </a>
+      <a href="/people/donaldson-agbor/" class="card" data-reveal="1" style="text-align:left;background:none;border:0;padding:0;cursor:pointer">
+        <div style="position:relative;aspect-ratio:4/5;background:#e7ebed;overflow:hidden;margin-bottom:16px"><Image src={donaldson} alt="Orock Donaldson Agbor" width={1200} style="position:absolute;width:200%;max-width:none;left:-85%;top:-30%;filter:grayscale(1) contrast(1.06) brightness(0.98)" /></div>
+        <h3 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:20px;margin:0 0 6px;color:#00171F">Orock Donaldson Agbor</h3>
+        <div style="font-size:13.5px;color:#4a5a61;line-height:1.6">Associate<br />Buea</div>
+        <div style="font-size:13px;font-weight:500;color:#007EA7;margin-top:10px">View profile</div>
+      </a>
+    </div>
+  </section>
+</div>
+</Base>

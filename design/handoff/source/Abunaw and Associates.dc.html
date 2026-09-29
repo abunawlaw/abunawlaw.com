@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@300;400;500&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #FFFFFF; color: #00171F; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: #007EA7; text-decoration: none; }
+  a:hover { color: #00171F; text-decoration: underline; text-underline-offset: 3px; }
+  ::selection { background: #00A8E8; color: #FFFFFF; }
+  input, textarea, select, button { font-family: Archivo, Helvetica, sans-serif; }
+  summary::-webkit-details-marker { display: none; }
+</style>
+</helmet>
+
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#00171F"></rect><text x="50" y="62" font-family="Georgia,serif" font-size="30" fill="#FFFFFF" text-anchor="middle">A&amp;A</text></svg></template>
+
+<div style="font-family:Archivo,Helvetica,sans-serif;background:#FFFFFF">
+
+<header style="position:sticky;top:0;z-index:50;background:#FFFFFF;border-bottom:1px solid rgba(0,23,31,0.14)">
+  <div style="max-width:1360px;margin:0 auto;padding:0 clamp(20px,5vw,80px);height:78px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+    <button onClick="{{ goHome }}" style="background:none;border:0;padding:0;cursor:pointer;text-align:left;font-family:Spectral,Georgia,serif;font-size:19px;font-weight:400;letter-spacing:0.06em;color:#00171F;text-transform:uppercase;white-space:nowrap">Abunaw <span style="color:#007EA7">&amp;</span> Associates</button>
+    <div style="display:flex;align-items:center;gap:clamp(14px,2.2vw,32px)">
+      <sc-if value="{{ isEn }}" hint-placeholder-val="{{ true }}">
+        <nav style="display:flex;align-items:center;gap:clamp(14px,2.2vw,30px)">
+          <button onClick="{{ goPractices }}" style="background:none;border:0;padding:0;cursor:pointer;font-size:13.5px;font-weight:500;letter-spacing:0.04em;color:#00171F;white-space:nowrap">Practices</button>
+          <button onClick="{{ goPeople }}" style="background:none;border:0;padding:0;cursor:pointer;font-size:13.5px;font-weight:500;letter-spacing:0.04em;color:#00171F;white-space:nowrap">People</button>
+          <button onClick="{{ goAbout }}" style="background:none;border:0;padding:0;cursor:pointer;font-size:13.5px;font-weight:500;letter-spacing:0.04em;color:#00171F;white-space:nowrap">About</button>
+          <button onClick="{{ goInsights }}" style="background:none;border:0;padding:0;cursor:pointer;font-size:13.5px;font-weight:500;letter-spacing:0.04em;color:#00171F;white-space:nowrap">Insights</button>
+          <button onClick="{{ goCareers }}" style="background:none;border:0;padding:0;cursor:pointer;font-size:13.5px;font-weight:500;letter-spacing:0.04em;color:#00171F;white-space:nowrap">Careers</button>
+          <button onClick="{{ goContact }}" style="background:none;border:1px solid rgba(0,23,31,0.22);padding:9px 16px;cursor:pointer;font-size:13.5px;font-weight:500;letter-spacing:0.04em;color:#00171F;white-space:nowrap">Contact</button>
+        </nav>
+      </sc-if>
+      <sc-if value="{{ isFr }}" hint-placeholder-val="{{ false }}">
+        <nav style="display:flex;align-items:center;gap:clamp(14px,2.2vw,30px)">
+          <button onClick="{{ goPractices }}" style="background:none;border:0;padding:0;cursor:pointer;font-size:13.5px;font-weight:500;letter-spacing:0.04em;color:#00171F;white-space:nowrap">Domaines</button>
+          <button onClick="{{ goPeople }}" style="background:none;border:0;padding:0;cursor:pointer;font-size:13.5px;font-weight:500;letter-spacing:0.04em;color:#00171F;white-space:nowrap">Équipe</button>
+          <button onClick="{{ goAbout }}" style="background:none;border:0;padding:0;cursor:pointer;font-size:13.5px;font-weight:500;letter-spacing:0.04em;color:#00171F;white-space:nowrap">Le cabinet</button>
+          <button onClick="{{ goInsights }}" style="background:none;border:0;padding:0;cursor:pointer;font-size:13.5px;font-weight:500;letter-spacing:0.04em;color:#00171F;white-space:nowrap">Publications</button>
+          <button onClick="{{ goCareers }}" style="background:none;border:0;padding:0;cursor:pointer;font-size:13.5px;font-weight:500;letter-spacing:0.04em;color:#00171F;white-space:nowrap">Carrières</button>
+          <button onClick="{{ goContact }}" style="background:none;border:1px solid rgba(0,23,31,0.22);padding:9px 16px;cursor:pointer;font-size:13.5px;font-weight:500;letter-spacing:0.04em;color:#00171F;white-space:nowrap">Contact</button>
+        </nav>
+      </sc-if>
+      <sc-if value="{{ showLang }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;align-items:center;gap:8px;border-left:1px solid rgba(0,23,31,0.14);padding-left:clamp(12px,2vw,24px)">
+          <button onClick="{{ setEn }}" style="background:none;border:0;padding:0;cursor:pointer;font-size:12px;font-weight:600;letter-spacing:0.1em;color:{{ enColor }}">EN</button>
+          <span style="font-size:12px;color:rgba(0,23,31,0.3)">/</span>
+          <button onClick="{{ setFr }}" style="background:none;border:0;padding:0;cursor:pointer;font-size:12px;font-weight:600;letter-spacing:0.1em;color:{{ frColor }}">FR</button>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+</header>
+
+<sc-if value="{{ isFr }}" hint-placeholder-val="{{ false }}">
+  <div style="background:#00171F;color:#FFFFFF">
+    <div style="max-width:1360px;margin:0 auto;padding:12px clamp(20px,5vw,80px);font-size:13px;line-height:1.5">La version française complète du site est en cours de préparation. La navigation et la page d’accueil sont disponibles en français ; les pages détaillées restent en anglais. Toute demande peut être adressée en français.</div>
+  </div>
+</sc-if>
+
+<main>
+
+<!-- HOME -->
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+<div>
+  <section style="background:#00171F;color:#FFFFFF;position:relative;overflow:hidden">
+    <div style="position:absolute;inset:0;display:flex;justify-content:flex-end">
+      <div style="position:relative;width:min(72%,980px);height:100%">
+        <img src="../assets/francisca-abunaw.png" alt="Partner photograph" style="width:100%;height:100%;object-fit:cover;object-position:50% 16%;filter:grayscale(1) contrast(1.12) brightness(0.72)" />
+        <div style="position:absolute;inset:0;background:#003459;mix-blend-mode:color;opacity:0.9"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(90deg,#00171F 0%,#00171F 26%,rgba(0,23,31,0.86) 52%,rgba(0,23,31,0.2) 100%)"></div>
+      </div>
+    </div>
+    <div style="position:relative;max-width:1360px;margin:0 auto;padding:clamp(56px,8vw,112px) clamp(20px,5vw,80px) clamp(48px,6vw,88px);min-height:clamp(560px,76vh,820px);display:flex;flex-direction:column;justify-content:center">
+      <div style="font-size:11px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:#00A8E8;margin-bottom:clamp(24px,4vw,44px)">Douala · Buea</div>
+      <sc-if value="{{ isEn }}" hint-placeholder-val="{{ true }}">
+        <h1 style="font-family:Spectral,Georgia,serif;font-weight:300;font-size:clamp(56px,11vw,168px);line-height:0.94;letter-spacing:-0.035em;margin:0">Integrity.<br />Results.</h1>
+        <p style="font-size:clamp(17px,1.5vw,21px);line-height:1.6;color:rgba(255,255,255,0.86);max-width:44ch;margin:clamp(28px,4vw,48px) 0 0;text-wrap:pretty">Counsel in an OHADA market. A Cameroonian firm advising companies, lenders and families in English and French, in both of the country’s legal traditions.</p>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:clamp(32px,4vw,48px)">
+          <button onClick="{{ goPractices }}" style="background:#FFFFFF;color:#00171F;border:0;padding:14px 26px;cursor:pointer;font-size:14px;font-weight:500;letter-spacing:0.04em;white-space:nowrap">Our practices</button>
+          <button onClick="{{ goContact }}" style="background:none;color:#FFFFFF;border:1px solid rgba(255,255,255,0.45);padding:14px 26px;cursor:pointer;font-size:14px;font-weight:500;letter-spacing:0.04em;white-space:nowrap">Contact the firm</button>
+        </div>
+      </sc-if>
+      <sc-if value="{{ isFr }}" hint-placeholder-val="{{ false }}">
+        <h1 style="font-family:Spectral,Georgia,serif;font-weight:300;font-size:clamp(56px,11vw,168px);line-height:0.94;letter-spacing:-0.035em;margin:0">Intégrité.<br />Résultats.</h1>
+        <p style="font-size:clamp(17px,1.5vw,21px);line-height:1.6;color:rgba(255,255,255,0.86);max-width:44ch;margin:clamp(28px,4vw,48px) 0 0;text-wrap:pretty">Conseil en environnement OHADA. Cabinet camerounais au service des entreprises, des établissements de crédit et des familles, en anglais et en français, dans les deux traditions juridiques du pays.</p>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:clamp(32px,4vw,48px)">
+          <button onClick="{{ goPractices }}" style="background:#FFFFFF;color:#00171F;border:0;padding:14px 26px;cursor:pointer;font-size:14px;font-weight:500;letter-spacing:0.04em;white-space:nowrap">Nos domaines</button>
+          <button onClick="{{ goContact }}" style="background:none;color:#FFFFFF;border:1px solid rgba(255,255,255,0.45);padding:14px 26px;cursor:pointer;font-size:14px;font-weight:500;letter-spacing:0.04em;white-space:nowrap">Contacter le cabinet</button>
+        </div>
+      </sc-if>
+    </div>
+  </section>
+
+  <hr style="border:0;border-top:1px solid rgba(0,23,31,0.14);margin:0" />
+
+  <section data-reveal="1" style="max-width:1360px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(20px,5vw,80px)">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:24px;flex-wrap:wrap;margin-bottom:clamp(28px,4vw,48px)">
+      <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(24px,2.6vw,34px);line-height:1.2;margin:0">Areas of practice</h2>
+      <button onClick="{{ goPractices }}" style="background:none;border:0;cursor:pointer;font-size:13.5px;font-weight:500;color:#007EA7;border-bottom:1px solid #007EA7;padding:0 0 2px">All practices</button>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:36px 32px">
+      <div style="border-top:2px solid #00171F;padding-top:18px;display:flex;flex-direction:column;gap:10px">
+        <span style="font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#007EA7">01</span>
+        <h3 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:21px;line-height:1.25;margin:0">Corporate &amp; Commercial</h3>
+        <p style="font-size:14.5px;line-height:1.6;color:#4a5a61;margin:0">Corporate structuring and restructuring · Commercial transactions · Company incorporation / business formation</p>
+        <button onClick="{{ goCorporate }}" style="background:none;border:0;padding:0;cursor:pointer;font-size:13.5px;font-weight:500;color:#007EA7;text-align:left">Read more</button>
+      </div>
+      <div style="border-top:1px solid rgba(0,23,31,0.2);padding-top:18px;display:flex;flex-direction:column;gap:10px">
+        <span style="font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#007EA7">02</span>
+        <h3 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:21px;line-height:1.25;margin:0">Corporate Compliance &amp; Governance</h3>
+        <p style="font-size:14.5px;line-height:1.6;color:#4a5a61;margin:0">Regulatory compliance advisory · Corporate governance frameworks · Tax compliance · AML compliance · Data protection · NGO/organizational policy review</p>
+        <button onClick="{{ goCompliance }}" style="background:none;border:0;padding:0;cursor:pointer;font-size:13.5px;font-weight:500;color:#007EA7;text-align:left">Read more</button>
+      </div>
+      <div style="border-top:1px solid rgba(0,23,31,0.2);padding-top:18px;display:flex;flex-direction:column;gap:10px">
+        <span style="font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#007EA7">03</span>
+        <h3 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:21px;line-height:1.25;margin:0">Succession &amp; Probate</h3>
+        <p style="font-size:14.5px;line-height:1.6;color:#4a5a61;margin:0">Succession planning · Letters of administration · Probate matters</p>
+        <button onClick="{{ goEstate }}" style="background:none;border:0;padding:0;cursor:pointer;font-size:13.5px;font-weight:500;color:#007EA7;text-align:left">Read more</button>
+      </div>
+      <div style="border-top:1px solid rgba(0,23,31,0.2);padding-top:18px;display:flex;flex-direction:column;gap:10px">
+        <span style="font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#007EA7">04</span>
+        <h3 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:21px;line-height:1.25;margin:0">Real Estate &amp; Land Law</h3>
+        <p style="font-size:14.5px;line-height:1.6;color:#4a5a61;margin:0">Property transactions · Land law advisory</p>
+        <button onClick="{{ goLand }}" style="background:none;border:0;padding:0;cursor:pointer;font-size:13.5px;font-weight:500;color:#007EA7;text-align:left">Read more</button>
+      </div>
+      <div style="border-top:1px solid rgba(0,23,31,0.2);padding-top:18px;display:flex;flex-direction:column;gap:10px">
+        <span style="font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#007EA7">05</span>
+        <h3 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:21px;line-height:1.25;margin:0">Labour &amp; Employment Law</h3>
+        <p style="font-size:14.5px;line-height:1.6;color:#4a5a61;margin:0">Employment contracts and disputes · Workplace compliance</p>
+      </div>
+      <div style="border-top:1px solid rgba(0,23,31,0.2);padding-top:18px;display:flex;flex-direction:column;gap:10px">
+        <span style="font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#007EA7">06</span>
+        <h3 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:21px;line-height:1.25;margin:0">Family Law</h3>
+        <p style="font-size:14.5px;line-height:1.6;color:#4a5a61;margin:0">Family law matters and representation</p>
+      </div>
+      <div style="border-top:1px solid rgba(0,23,31,0.2);padding-top:18px;display:flex;flex-direction:column;gap:10px">
+        <span style="font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#007EA7">07</span>
+        <h3 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:21px;line-height:1.25;margin:0">Criminal Litigation</h3>
+        <p style="font-size:14.5px;line-height:1.6;color:#4a5a61;margin:0">Criminal defense and litigation</p>
+      </div>
+      <div style="border-top:1px solid rgba(0,23,31,0.2);padding-top:18px;display:flex;flex-direction:column;gap:10px">
+        <span style="font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#007EA7">08</span>
+        <h3 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:21px;line-height:1.25;margin:0">Human Rights Law</h3>
+        <p style="font-size:14.5px;line-height:1.6;color:#4a5a61;margin:0">Human rights advocacy and representation</p>
+      </div>
+      <div style="border-top:1px solid rgba(0,23,31,0.2);padding-top:18px;display:flex;flex-direction:column;gap:10px">
+        <span style="font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#007EA7">09</span>
+        <h3 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:21px;line-height:1.25;margin:0">Consumer Protection</h3>
+        <p style="font-size:14.5px;line-height:1.6;color:#4a5a61;margin:0">Consumer rights advisory</p>
+      </div>
+      <div style="border-top:1px solid rgba(0,23,31,0.2);padding-top:18px;display:flex;flex-direction:column;gap:10px">
+        <span style="font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#007EA7">10</span>
+        <h3 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:21px;line-height:1.25;margin:0">Legal Translation</h3>
+        <p style="font-size:14.5px;line-height:1.6;color:#4a5a61;margin:0">Legal document translation (English/French)</p>
+      </div>
+    </div>
+  </section>
+
+  <hr style="border:0;border-top:1px solid rgba(0,23,31,0.14);margin:0" />
+
+  <section data-reveal="1" style="max-width:1360px;margin:0 auto;padding:clamp(56px,7vw,104px) clamp(20px,5vw,80px)">
+    <div style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px">
+      <div style="grid-column:span 4;min-width:220px">
+        <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(26px,3vw,40px);line-height:1.15;margin:0;max-width:16ch">Why Cameroon, why common law</h2>
+      </div>
+      <div style="grid-column:span 7;min-width:280px">
+        <p style="font-size:17.5px;line-height:1.75;color:#28383f;margin:0 0 20px;max-width:68ch;text-wrap:pretty">Cameroon is bijural. Common law applies in the Northwest and Southwest regions; civil law applies elsewhere. Above both sit the OHADA Uniform Acts, which govern company law, secured transactions, insolvency and commercial arbitration nationwide.</p>
+        <p style="font-size:17.5px;line-height:1.75;color:#28383f;margin:0 0 20px;max-width:68ch;text-wrap:pretty">For an investor arriving from London, Lagos, Accra or Nairobi, that combination is unfamiliar. Documents are drafted to common-law expectations; the register, the courts and the security regime are OHADA. Our lawyers work on both sides of that line, in both working languages, without translation loss.</p>
+        <p style="font-size:17.5px;line-height:1.75;color:#28383f;margin:0;max-width:68ch;text-wrap:pretty">We also act for Cameroonian companies going the other way — into CEMAC and ECOWAS markets, and into common-law jurisdictions where local counsel needs a partner who understands what was agreed at home.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-reveal="1" style="background:#00171F;color:#FFFFFF">
+    <div style="max-width:1360px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(20px,5vw,80px)">
+      <div style="font-size:11px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:#00A8E8;margin-bottom:clamp(28px,4vw,48px)">Experience</div>
+      <div style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px">
+        <p style="grid-column:span 4;min-width:230px;font-family:Spectral,Georgia,serif;font-size:clamp(19px,1.8vw,23px);line-height:1.5;margin:0;padding-top:20px;border-top:1px solid rgba(255,255,255,0.28)">More than 30 companies advised across banking and finance, payments, telecommunications, logistics, and oil and gas.</p>
+        <p style="grid-column:span 4;min-width:230px;font-family:Spectral,Georgia,serif;font-size:clamp(19px,1.8vw,23px);line-height:1.5;margin:0;padding-top:20px;border-top:1px solid rgba(255,255,255,0.28)">Around 12 businesses guided through incorporation and formation.</p>
+        <p style="grid-column:span 4;min-width:230px;font-family:Spectral,Georgia,serif;font-size:clamp(19px,1.8vw,23px);line-height:1.5;margin:0;padding-top:20px;border-top:1px solid rgba(255,255,255,0.28)">Internal governance frameworks reviewed and strengthened for human resources firms and NGOs.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-reveal="1" style="max-width:1360px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(20px,5vw,80px)">
+    <div style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px">
+      <div style="grid-column:span 4;min-width:220px;border-top:1px solid rgba(0,23,31,0.2);padding-top:20px">
+        <h3 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:22px;margin:0 0 10px">Douala</h3>
+        <p style="font-size:14.5px;line-height:1.7;color:#4a5a61;margin:0">Head office<br /><span style="font-family:ui-monospace,Menlo,monospace;font-size:13px;color:#6b7b82">[street address]</span><br /><span style="font-family:ui-monospace,Menlo,monospace;font-size:13px;color:#6b7b82">[+237 telephone]</span></p>
+      </div>
+      <div style="grid-column:span 4;min-width:220px;border-top:1px solid rgba(0,23,31,0.2);padding-top:20px">
+        <h3 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:22px;margin:0 0 10px">Buea</h3>
+        <p style="font-size:14.5px;line-height:1.7;color:#4a5a61;margin:0">Southwest Region<br /><span style="font-family:ui-monospace,Menlo,monospace;font-size:13px;color:#6b7b82">[street address]</span><br /><span style="font-family:ui-monospace,Menlo,monospace;font-size:13px;color:#6b7b82">[+237 telephone]</span></p>
+      </div>
+      <div style="grid-column:span 4;min-width:220px;padding-top:20px">
+        <button onClick="{{ goContact }}" style="background:none;border:1px solid rgba(0,23,31,0.22);padding:12px 18px;cursor:pointer;font-size:13.5px;font-weight:500;color:#00171F">Contact the firm</button>
+      </div>
+    </div>
+  </section>
+
+  <hr style="border:0;border-top:1px solid rgba(0,23,31,0.14);margin:0" />
+
+  <section data-reveal="1" style="max-width:1360px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(20px,5vw,80px)">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:24px;flex-wrap:wrap;margin-bottom:clamp(24px,3vw,40px)">
+      <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(24px,2.6vw,34px);margin:0">Insights</h2>
+      <button onClick="{{ goInsights }}" style="background:none;border:0;cursor:pointer;font-size:13.5px;font-weight:500;color:#007EA7;border-bottom:1px solid #007EA7;padding:0 0 2px">All insights</button>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px">
+      <button onClick="{{ goArticle }}" style="grid-column:span 4;min-width:240px;text-align:left;background:none;border:0;border-top:1px solid rgba(0,23,31,0.2);padding:20px 0 0;cursor:pointer">
+        <div style="font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#6b7b82;margin-bottom:12px">[month year] · Finance</div>
+        <h3 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:21px;line-height:1.3;margin:0;color:#00171F;max-width:32ch">Registering security at the RCCM: what lenders get wrong</h3>
+      </button>
+      <button onClick="{{ goArticle }}" style="grid-column:span 4;min-width:240px;text-align:left;background:none;border:0;border-top:1px solid rgba(0,23,31,0.2);padding:20px 0 0;cursor:pointer">
+        <div style="font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#6b7b82;margin-bottom:12px">[month year] · Land</div>
+        <h3 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:21px;line-height:1.3;margin:0;color:#00171F;max-width:32ch">Customary tenure and registered title in the Southwest</h3>
+      </button>
+      <button onClick="{{ goArticle }}" style="grid-column:span 4;min-width:240px;text-align:left;background:none;border:0;border-top:1px solid rgba(0,23,31,0.2);padding:20px 0 0;cursor:pointer">
+        <div style="font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#6b7b82;margin-bottom:12px">[month year] · Corporate</div>
+        <h3 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:21px;line-height:1.3;margin:0;color:#00171F;max-width:32ch">Choosing between an SA, a SARL and an SAS</h3>
+      </button>
+    </div>
+  </section>
+</div>
+</sc-if>
+
+<!-- PRACTICES INDEX -->
+<sc-if value="{{ isPractices }}" hint-placeholder-val="{{ false }}">
+<div>
+  <section style="max-width:1360px;margin:0 auto;padding:clamp(56px,8vw,120px) clamp(20px,5vw,80px) clamp(40px,5vw,64px)">
+    <div style="font-size:11px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:#007EA7;margin-bottom:28px">Practices</div>
+    <h1 style="font-family:Spectral,Georgia,serif;font-weight:300;font-size:clamp(36px,5vw,64px);line-height:1.08;letter-spacing:-0.02em;margin:0;max-width:22ch">Core practice areas</h1>
+    <p style="font-size:17.5px;line-height:1.75;color:#38484f;max-width:66ch;margin:32px 0 0">We advise businesses, organisations and individuals from our offices in Douala and Buea, working in English and French under Cameroonian, OHADA and CEMAC law.</p>
+  </section>
+  <section style="max-width:1360px;margin:0 auto;padding:0 clamp(20px,5vw,80px) clamp(40px,5vw,72px);border-top:1px solid rgba(0,23,31,0.14)">
+    <div data-reveal="1" style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px;padding:clamp(28px,3.5vw,44px) 0;border-bottom:1px solid rgba(0,23,31,0.14)">
+      <div style="grid-column:span 5;min-width:240px;display:flex;gap:20px;align-items:baseline">
+        <span style="font-family:ui-monospace,Menlo,monospace;font-size:13px;color:#007EA7">01</span>
+        <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(23px,2.4vw,31px);line-height:1.15;margin:0">Corporate &amp; Commercial</h2>
+      </div>
+      <div style="grid-column:span 6;min-width:260px;display:flex;flex-direction:column;gap:16px;align-items:flex-start">
+        <ul style="margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px 28px;width:100%"><li style="font-size:15.5px;line-height:1.55;color:#28383f">Corporate structuring and restructuring</li><li style="font-size:15.5px;line-height:1.55;color:#28383f">Commercial transactions</li><li style="font-size:15.5px;line-height:1.55;color:#28383f">Company incorporation / business formation</li></ul>
+        <button onClick="{{ goCorporate }}" style="background:none;border:1px solid rgba(0,23,31,0.22);padding:10px 16px;cursor:pointer;font-size:13.5px;font-weight:500;color:#00171F">Read more</button>
+      </div>
+    </div>
+    <div data-reveal="1" style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px;padding:clamp(28px,3.5vw,44px) 0;border-bottom:1px solid rgba(0,23,31,0.14)">
+      <div style="grid-column:span 5;min-width:240px;display:flex;gap:20px;align-items:baseline">
+        <span style="font-family:ui-monospace,Menlo,monospace;font-size:13px;color:#007EA7">02</span>
+        <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(23px,2.4vw,31px);line-height:1.15;margin:0">Corporate Compliance &amp; Governance</h2>
+      </div>
+      <div style="grid-column:span 6;min-width:260px;display:flex;flex-direction:column;gap:16px;align-items:flex-start">
+        <ul style="margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px 28px;width:100%"><li style="font-size:15.5px;line-height:1.55;color:#28383f">Regulatory compliance advisory</li><li style="font-size:15.5px;line-height:1.55;color:#28383f">Corporate governance frameworks</li><li style="font-size:15.5px;line-height:1.55;color:#28383f">Tax compliance</li><li style="font-size:15.5px;line-height:1.55;color:#28383f">AML compliance</li><li style="font-size:15.5px;line-height:1.55;color:#28383f">Data protection</li><li style="font-size:15.5px;line-height:1.55;color:#28383f">NGO/organizational policy review</li></ul>
+        <button onClick="{{ goCompliance }}" style="background:none;border:1px solid rgba(0,23,31,0.22);padding:10px 16px;cursor:pointer;font-size:13.5px;font-weight:500;color:#00171F">Read more</button>
+      </div>
+    </div>
+    <div data-reveal="1" style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px;padding:clamp(28px,3.5vw,44px) 0;border-bottom:1px solid rgba(0,23,31,0.14)">
+      <div style="grid-column:span 5;min-width:240px;display:flex;gap:20px;align-items:baseline">
+        <span style="font-family:ui-monospace,Menlo,monospace;font-size:13px;color:#007EA7">03</span>
+        <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(23px,2.4vw,31px);line-height:1.15;margin:0">Succession &amp; Probate</h2>
+      </div>
+      <div style="grid-column:span 6;min-width:260px;display:flex;flex-direction:column;gap:16px;align-items:flex-start">
+        <ul style="margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px 28px;width:100%"><li style="font-size:15.5px;line-height:1.55;color:#28383f">Succession planning</li><li style="font-size:15.5px;line-height:1.55;color:#28383f">Letters of administration</li><li style="font-size:15.5px;line-height:1.55;color:#28383f">Probate matters</li></ul>
+        <button onClick="{{ goEstate }}" style="background:none;border:1px solid rgba(0,23,31,0.22);padding:10px 16px;cursor:pointer;font-size:13.5px;font-weight:500;color:#00171F">Read more</button>
+      </div>
+    </div>
+    <div data-reveal="1" style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px;padding:clamp(28px,3.5vw,44px) 0;border-bottom:1px solid rgba(0,23,31,0.14)">
+      <div style="grid-column:span 5;min-width:240px;display:flex;gap:20px;align-items:baseline">
+        <span style="font-family:ui-monospace,Menlo,monospace;font-size:13px;color:#007EA7">04</span>
+        <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(23px,2.4vw,31px);line-height:1.15;margin:0">Real Estate &amp; Land Law</h2>
+      </div>
+      <div style="grid-column:span 6;min-width:260px;display:flex;flex-direction:column;gap:16px;align-items:flex-start">
+        <ul style="margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px 28px;width:100%"><li style="font-size:15.5px;line-height:1.55;color:#28383f">Property transactions</li><li style="font-size:15.5px;line-height:1.55;color:#28383f">Land law advisory</li></ul>
+        <button onClick="{{ goLand }}" style="background:none;border:1px solid rgba(0,23,31,0.22);padding:10px 16px;cursor:pointer;font-size:13.5px;font-weight:500;color:#00171F">Read more</button>
+      </div>
+    </div>
+    <div data-reveal="1" style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px;padding:clamp(28px,3.5vw,44px) 0;border-bottom:1px solid rgba(0,23,31,0.14)">
+      <div style="grid-column:span 5;min-width:240px;display:flex;gap:20px;align-items:baseline">
+        <span style="font-family:ui-monospace,Menlo,monospace;font-size:13px;color:#007EA7">05</span>
+        <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(23px,2.4vw,31px);line-height:1.15;margin:0">Labour &amp; Employment Law</h2>
+      </div>
+      <div style="grid-column:span 6;min-width:260px;display:flex;flex-direction:column;gap:16px;align-items:flex-start">
+        <ul style="margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px 28px;width:100%"><li style="font-size:15.5px;line-height:1.55;color:#28383f">Employment contracts and disputes</li><li style="font-size:15.5px;line-height:1.55;color:#28383f">Workplace compliance</li></ul>
+      </div>
+    </div>
+    <div data-reveal="1" style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px;padding:clamp(28px,3.5vw,44px) 0;border-bottom:1px solid rgba(0,23,31,0.14)">
+      <div style="grid-column:span 5;min-width:240px;display:flex;gap:20px;align-items:baseline">
+        <span style="font-family:ui-monospace,Menlo,monospace;font-size:13px;color:#007EA7">06</span>
+        <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(23px,2.4vw,31px);line-height:1.15;margin:0">Family Law</h2>
+      </div>
+      <div style="grid-column:span 6;min-width:260px;display:flex;flex-direction:column;gap:16px;align-items:flex-start">
+        <ul style="margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px 28px;width:100%"><li style="font-size:15.5px;line-height:1.55;color:#28383f">Family law matters and representation</li></ul>
+      </div>
+    </div>
+    <div data-reveal="1" style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px;padding:clamp(28px,3.5vw,44px) 0;border-bottom:1px solid rgba(0,23,31,0.14)">
+      <div style="grid-column:span 5;min-width:240px;display:flex;gap:20px;align-items:baseline">
+        <span style="font-family:ui-monospace,Menlo,monospace;font-size:13px;color:#007EA7">07</span>
+        <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(23px,2.4vw,31px);line-height:1.15;margin:0">Criminal Litigation</h2>
+      </div>
+      <div style="grid-column:span 6;min-width:260px;display:flex;flex-direction:column;gap:16px;align-items:flex-start">
+        <ul style="margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px 28px;width:100%"><li style="font-size:15.5px;line-height:1.55;color:#28383f">Criminal defense and litigation</li></ul>
+      </div>
+    </div>
+    <div data-reveal="1" style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px;padding:clamp(28px,3.5vw,44px) 0;border-bottom:1px solid rgba(0,23,31,0.14)">
+      <div style="grid-column:span 5;min-width:240px;display:flex;gap:20px;align-items:baseline">
+        <span style="font-family:ui-monospace,Menlo,monospace;font-size:13px;color:#007EA7">08</span>
+        <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(23px,2.4vw,31px);line-height:1.15;margin:0">Human Rights Law</h2>
+      </div>
+      <div style="grid-column:span 6;min-width:260px;display:flex;flex-direction:column;gap:16px;align-items:flex-start">
+        <ul style="margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px 28px;width:100%"><li style="font-size:15.5px;line-height:1.55;color:#28383f">Human rights advocacy and representation</li></ul>
+      </div>
+    </div>
+    <div data-reveal="1" style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px;padding:clamp(28px,3.5vw,44px) 0;border-bottom:1px solid rgba(0,23,31,0.14)">
+      <div style="grid-column:span 5;min-width:240px;display:flex;gap:20px;align-items:baseline">
+        <span style="font-family:ui-monospace,Menlo,monospace;font-size:13px;color:#007EA7">09</span>
+        <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(23px,2.4vw,31px);line-height:1.15;margin:0">Consumer Protection</h2>
+      </div>
+      <div style="grid-column:span 6;min-width:260px;display:flex;flex-direction:column;gap:16px;align-items:flex-start">
+        <ul style="margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px 28px;width:100%"><li style="font-size:15.5px;line-height:1.55;color:#28383f">Consumer rights advisory</li></ul>
+      </div>
+    </div>
+    <div data-reveal="1" style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px;padding:clamp(28px,3.5vw,44px) 0;border-bottom:1px solid rgba(0,23,31,0.14)">
+      <div style="grid-column:span 5;min-width:240px;display:flex;gap:20px;align-items:baseline">
+        <span style="font-family:ui-monospace,Menlo,monospace;font-size:13px;color:#007EA7">10</span>
+        <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(23px,2.4vw,31px);line-height:1.15;margin:0">Legal Translation</h2>
+      </div>
+      <div style="grid-column:span 6;min-width:260px;display:flex;flex-direction:column;gap:16px;align-items:flex-start">
+        <ul style="margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px 28px;width:100%"><li style="font-size:15.5px;line-height:1.55;color:#28383f">Legal document translation (English/French)</li></ul>
+      </div>
+    </div>
+  </section>
+</div>
+</sc-if>
+
+<!-- CORPORATE -->
+<sc-if value="{{ isCorporate }}" hint-placeholder-val="{{ false }}">
+<div>
+  <section style="max-width:1360px;margin:0 auto;padding:clamp(48px,7vw,104px) clamp(20px,5vw,80px) clamp(36px,4vw,56px)">
+    <button onClick="{{ goPractices }}" style="background:none;border:0;padding:0;cursor:pointer;font-size:12px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#007EA7;margin-bottom:26px">← Practices</button>
+    <h1 style="font-family:Spectral,Georgia,serif;font-weight:300;font-size:clamp(36px,5.2vw,68px);line-height:1.06;letter-spacing:-0.02em;margin:0;max-width:22ch">Corporate, Commercial &amp; Compliance</h1>
+    <p style="font-size:clamp(17px,1.4vw,20px);line-height:1.7;color:#38484f;max-width:66ch;margin:32px 0 0">We advise companies and organisations on how they are structured, how they contract, and how they meet their regulatory obligations under Cameroonian, OHADA and CEMAC law.</p>
+  </section>
+  <hr style="border:0;border-top:1px solid rgba(0,23,31,0.14);margin:0" />
+  <section style="max-width:1360px;margin:0 auto;padding:0 clamp(20px,5vw,80px)">
+    <div style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px">
+      <aside style="grid-column:span 3;min-width:200px;align-self:start;position:sticky;top:110px;padding:clamp(32px,4vw,56px) 0">
+        <div style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#6b7b82;margin-bottom:18px">On this page</div>
+        <nav style="display:flex;flex-direction:column;gap:11px;border-left:1px solid rgba(0,23,31,0.16);padding-left:18px">
+          <span style="font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#007EA7">Corporate &amp; Commercial</span>
+          <a href="#structuring" style="font-size:14px;line-height:1.4;color:#00171F">Structuring and restructuring</a>
+          <a href="#transactions" style="font-size:14px;line-height:1.4;color:#00171F">Commercial transactions</a>
+          <a href="#incorporation" style="font-size:14px;line-height:1.4;color:#00171F">Incorporation and formation</a>
+          <span style="font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#007EA7;margin-top:10px">Compliance &amp; Governance</span>
+          <a href="#regulatory" style="font-size:14px;line-height:1.4;color:#00171F">Regulatory compliance</a>
+          <a href="#governance" style="font-size:14px;line-height:1.4;color:#00171F">Governance frameworks</a>
+          <a href="#tax" style="font-size:14px;line-height:1.4;color:#00171F">Tax compliance</a>
+          <a href="#aml" style="font-size:14px;line-height:1.4;color:#00171F">AML compliance</a>
+          <a href="#data" style="font-size:14px;line-height:1.4;color:#00171F">Data protection</a>
+          <a href="#ngo" style="font-size:14px;line-height:1.4;color:#00171F">NGO and organisational policy</a>
+          <a href="#faq" style="font-size:14px;line-height:1.4;color:#00171F">Questions</a>
+        </nav>
+      </aside>
+      <div style="grid-column:span 8;min-width:280px;padding:clamp(32px,4vw,56px) 0 clamp(48px,6vw,88px)">
+
+        <section id="structuring" style="scroll-margin-top:110px;padding:0 0 44px;border-bottom:1px solid rgba(0,23,31,0.14)">
+          <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(25px,2.4vw,32px);line-height:1.2;margin:0 0 20px">Corporate structuring and restructuring</h2><p style="font-size:17px;line-height:1.75;color:#28383f;margin:0 0 16px;max-width:68ch;text-wrap:pretty">We advise on how a business should be organised: the choice of vehicle, the allocation of shares and control, group structures and holding arrangements, and the changes that follow growth, investment or a change of ownership.</p><p style="font-size:17px;line-height:1.75;color:#28383f;margin:0 0 0px;max-width:68ch;text-wrap:pretty">Restructuring work includes capital increases and reductions, conversions between company forms, share transfers, mergers and reorganisations within a group, and the amendments to articles and registrations each step requires.</p>
+        </section>
+
+        <section id="transactions" style="scroll-margin-top:110px;padding:44px 0;border-bottom:1px solid rgba(0,23,31,0.14)">
+          <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(25px,2.4vw,32px);line-height:1.2;margin:0 0 20px">Commercial transactions</h2><p style="font-size:17px;line-height:1.75;color:#28383f;margin:0 0 16px;max-width:68ch;text-wrap:pretty">Drafting, review and negotiation of the agreements a business runs on: supply, services and distribution contracts, commercial agency, licensing, shareholder and joint-venture agreements, and terms of business.</p><p style="font-size:17px;line-height:1.75;color:#28383f;margin:0 0 0px;max-width:68ch;text-wrap:pretty">We draft to be enforced. Contracts are prepared in English, French or both, with governing-law and dispute-resolution provisions chosen for where the counterparty and its assets actually are.</p>
+        </section>
+
+        <section id="incorporation" style="scroll-margin-top:110px;padding:44px 0;border-bottom:1px solid rgba(0,23,31,0.14)">
+          <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(25px,2.4vw,32px);line-height:1.2;margin:0 0 20px">Company incorporation and business formation</h2><p style="font-size:17px;line-height:1.75;color:#28383f;margin:0 0 16px;max-width:68ch;text-wrap:pretty">We take businesses from first decision to registration under the OHADA Uniform Act on Commercial Companies: choice of vehicle, articles of association, capital deposit, notarial steps, registration at the RCCM and the tax and social-security registrations that follow.</p><dl style="margin:18px 0 0;display:grid;gap:14px;max-width:68ch"><div style="display:grid;grid-template-columns:minmax(90px,120px) 1fr;gap:20px;border-top:1px solid rgba(0,23,31,0.1);padding-top:14px"><dt style="font-size:14px;font-weight:600">SA</dt><dd style="margin:0;font-size:15.5px;line-height:1.7;color:#4a5a61">Public company. Board or sole-administrator governance, statutory auditor, higher minimum capital. Suited to regulated businesses and ventures with institutional shareholders.</dd></div><div style="display:grid;grid-template-columns:minmax(90px,120px) 1fr;gap:20px;border-top:1px solid rgba(0,23,31,0.1);padding-top:14px"><dt style="font-size:14px;font-weight:600">SARL</dt><dd style="margin:0;font-size:15.5px;line-height:1.7;color:#4a5a61">The default operating company. Manager-run, flexible capital, share transfers subject to statutory and contractual consent.</dd></div><div style="display:grid;grid-template-columns:minmax(90px,120px) 1fr;gap:20px;border-top:1px solid rgba(0,23,31,0.1);padding-top:14px"><dt style="font-size:14px;font-weight:600">SAS</dt><dd style="margin:0;font-size:15.5px;line-height:1.7;color:#4a5a61">Contractual freedom in the articles: tailored share classes, veto rights and transfer mechanics.</dd></div><div style="display:grid;grid-template-columns:minmax(90px,120px) 1fr;gap:20px;border-top:1px solid rgba(0,23,31,0.1);padding-top:14px"><dt style="font-size:14px;font-weight:600">GIE</dt><dd style="margin:0;font-size:15.5px;line-height:1.7;color:#4a5a61">Economic interest group for pooled activity between existing businesses.</dd></div><div style="display:grid;grid-template-columns:minmax(90px,120px) 1fr;gap:20px;border-top:1px solid rgba(0,23,31,0.1);padding-top:14px"><dt style="font-size:14px;font-weight:600">Branch</dt><dd style="margin:0;font-size:15.5px;line-height:1.7;color:#4a5a61">Registration of a foreign company’s branch, with its statutory duration limits and conversion requirements.</dd></div></dl>
+        </section>
+
+        <section id="regulatory" style="scroll-margin-top:110px;padding:44px 0;border-bottom:1px solid rgba(0,23,31,0.14)">
+          <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(25px,2.4vw,32px);line-height:1.2;margin:0 0 20px">Regulatory compliance advisory</h2><p style="font-size:17px;line-height:1.75;color:#28383f;margin:0 0 0px;max-width:68ch;text-wrap:pretty">Advice on the licences, authorisations and ongoing obligations that apply to a business in its sector, and on how to organise compliance so that it can be demonstrated to a regulator. We work with clients in banking and finance, payments, telecommunications, logistics, and oil and gas.</p>
+        </section>
+
+        <section id="governance" style="scroll-margin-top:110px;padding:44px 0;border-bottom:1px solid rgba(0,23,31,0.14)">
+          <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(25px,2.4vw,32px);line-height:1.2;margin:0 0 20px">Corporate governance frameworks</h2><p style="font-size:17px;line-height:1.75;color:#28383f;margin:0 0 0px;max-width:68ch;text-wrap:pretty">Board and management structures, delegations of authority, internal rules, and the policies that allow a company to show how decisions are made and recorded. We review existing frameworks against the Uniform Act and the company’s own articles, and draft what is missing.</p>
+        </section>
+
+        <section id="tax" style="scroll-margin-top:110px;padding:44px 0;border-bottom:1px solid rgba(0,23,31,0.14)">
+          <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(25px,2.4vw,32px);line-height:1.2;margin:0 0 20px">Tax compliance</h2><p style="font-size:17px;line-height:1.75;color:#28383f;margin:0 0 0px;max-width:68ch;text-wrap:pretty">Legal support on corporate tax obligations under the General Tax Code: registration, the tax consequences of structuring and transfers, withholding on payments, and responses to enquiries from the tax administration. We work alongside clients’ accountants and tax advisers.</p>
+        </section>
+
+        <section id="aml" style="scroll-margin-top:110px;padding:44px 0;border-bottom:1px solid rgba(0,23,31,0.14)">
+          <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(25px,2.4vw,32px);line-height:1.2;margin:0 0 20px">AML compliance</h2><p style="font-size:17px;line-height:1.75;color:#28383f;margin:0 0 0px;max-width:68ch;text-wrap:pretty">Advice on anti-money-laundering and counter-terrorist-financing obligations under the CEMAC framework: customer due diligence, record-keeping, suspicious-transaction reporting, and the internal policies and training that regulated entities are expected to maintain.</p>
+        </section>
+
+        <section id="data" style="scroll-margin-top:110px;padding:44px 0;border-bottom:1px solid rgba(0,23,31,0.14)">
+          <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(25px,2.4vw,32px);line-height:1.2;margin:0 0 20px">Data protection</h2><p style="font-size:17px;line-height:1.75;color:#28383f;margin:0 0 0px;max-width:68ch;text-wrap:pretty">Advice on the collection, use, storage and transfer of personal data under Cameroonian law: privacy notices, consent, data-processing agreements with service providers, cross-border transfers, and internal data-handling policies for employees and customers.</p>
+        </section>
+
+        <section id="ngo" style="scroll-margin-top:110px;padding:44px 0;border-bottom:1px solid rgba(0,23,31,0.14)">
+          <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(25px,2.4vw,32px);line-height:1.2;margin:0 0 20px">NGO and organisational policy review</h2><p style="font-size:17px;line-height:1.75;color:#28383f;margin:0 0 0px;max-width:68ch;text-wrap:pretty">For non-governmental organisations, human resources firms and other organisations: review of constitutions, governance documents and internal policies — including conduct, safeguarding, procurement and staff policies — with recommendations and redrafts that strengthen accountability.</p>
+        </section>
+
+        <section id="faq" style="scroll-margin-top:110px;padding:44px 0 0;">
+          <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(25px,2.4vw,32px);line-height:1.2;margin:0 0 20px">Questions we are asked</h2><div style="max-width:68ch">
+            <details style="border-top:1px solid rgba(0,23,31,0.16);padding:18px 0"><summary style="cursor:pointer;font-size:16.5px;font-weight:500;line-height:1.5;color:#00171F;list-style:none">Which vehicle should a new business use in Cameroon?</summary><p style="margin:14px 0 0;font-size:16px;line-height:1.75;color:#4a5a61">Most new operations are a SARL, for its light governance, or an SAS where shareholders want tailored arrangements in the articles. A branch can suit a foreign company testing the market but is time-limited. The right answer depends on licensing, the shareholders and the planned exit.</p></details>
+            <details style="border-top:1px solid rgba(0,23,31,0.16);padding:18px 0"><summary style="cursor:pointer;font-size:16.5px;font-weight:500;line-height:1.5;color:#00171F;list-style:none">Can our contracts be governed by English law?</summary><p style="margin:14px 0 0;font-size:16px;line-height:1.75;color:#4a5a61">Commercial contracts between sophisticated parties often can be. Company constitutions, employment relationships and interests in Cameroonian land remain subject to local and OHADA law, so we usually split the document suite rather than force one governing law across it.</p></details>
+            <details style="border-top:1px solid rgba(0,23,31,0.16);padding:18px 0"><summary style="cursor:pointer;font-size:16.5px;font-weight:500;line-height:1.5;color:#00171F;list-style:none">How long does incorporation take?</summary><p style="margin:14px 0 0;font-size:16px;line-height:1.75;color:#4a5a61"><span style="font-family:ui-monospace,Menlo,monospace;font-size:14px;color:#6b7b82">[Indicative timetable to be confirmed by the firm.]</span> Timing depends on notarial steps, the capital deposit, the registry’s turnaround and whether a sector licence is needed before trading.</p></details>
+            <details style="border-top:1px solid rgba(0,23,31,0.16);border-bottom:1px solid rgba(0,23,31,0.16);padding:18px 0"><summary style="cursor:pointer;font-size:16.5px;font-weight:500;line-height:1.5;color:#00171F;list-style:none">Do you work in English and French?</summary><p style="margin:14px 0 0;font-size:16px;line-height:1.75;color:#4a5a61">Yes. Advice, correspondence and negotiation follow the client’s language; filings follow the language of the authority. We also translate legal documents between English and French.</p></details>
+          </div>
+          <p style="font-size:13px;line-height:1.6;color:#6b7b82;margin:28px 0 0;max-width:68ch">General information about the firm’s practice, not legal advice. No lawyer-client relationship arises from reading this page.</p>
+        </section>
+      </div>
+    </div>
+  </section>
+</div>
+</sc-if>
+
+<!-- LAND -->
+<sc-if value="{{ isLand }}" hint-placeholder-val="{{ false }}">
+<div>
+  <section style="max-width:1360px;margin:0 auto;padding:clamp(48px,7vw,104px) clamp(20px,5vw,80px) clamp(36px,4vw,56px)">
+    <button onClick="{{ goPractices }}" style="background:none;border:0;padding:0;cursor:pointer;font-size:12px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#007EA7;margin-bottom:26px">← Practices</button>
+    <h1 style="font-family:Spectral,Georgia,serif;font-weight:300;font-size:clamp(36px,5.2vw,68px);line-height:1.06;letter-spacing:-0.02em;margin:0;max-width:20ch">Real Estate &amp; Land Law</h1>
+    <p style="font-size:clamp(17px,1.4vw,20px);line-height:1.7;color:#38484f;max-width:66ch;margin:32px 0 0">Land in Cameroon is governed by the 1974 Land Ordinances and a registration system that sits alongside living customary tenure. Most disputes we see begin with a title that was never properly verified.</p>
+  </section>
+  <hr style="border:0;border-top:1px solid rgba(0,23,31,0.14);margin:0" />
+  <section style="max-width:1360px;margin:0 auto;padding:0 clamp(20px,5vw,80px)">
+    <div style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px">
+      <aside style="grid-column:span 3;min-width:200px;align-self:start;position:sticky;top:110px;padding:clamp(32px,4vw,56px) 0">
+        <div style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#6b7b82;margin-bottom:18px">On this page</div>
+        <nav style="display:flex;flex-direction:column;gap:11px;border-left:1px solid rgba(0,23,31,0.16);padding-left:18px">
+          <a href="#ordinances" style="font-size:14px;line-height:1.4;color:#00171F">The 1974 Ordinances and registration</a>
+          <a href="#national" style="font-size:14px;line-height:1.4;color:#00171F">National lands and concessions</a>
+          <a href="#customary" style="font-size:14px;line-height:1.4;color:#00171F">Customary tenure and title</a>
+          <a href="#dd" style="font-size:14px;line-height:1.4;color:#00171F">Acquisition due diligence</a>
+          <a href="#sequence" style="font-size:14px;line-height:1.4;color:#00171F">Due-diligence sequence</a>
+          <a href="#leases" style="font-size:14px;line-height:1.4;color:#00171F">Leases and ground leases</a>
+          <a href="#development" style="font-size:14px;line-height:1.4;color:#00171F">Development and permitting</a>
+          <a href="#mortgages" style="font-size:14px;line-height:1.4;color:#00171F">Mortgages and land security</a>
+          <a href="#expropriation" style="font-size:14px;line-height:1.4;color:#00171F">Compulsory acquisition</a>
+          <a href="#litigation" style="font-size:14px;line-height:1.4;color:#00171F">Land disputes</a>
+        </nav>
+      </aside>
+      <div style="grid-column:span 8;min-width:280px;padding:clamp(32px,4vw,56px) 0 clamp(48px,6vw,88px)">
+
+        <section id="ordinances" style="scroll-margin-top:110px;padding-bottom:44px;border-bottom:1px solid rgba(0,23,31,0.14)">
+          <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(25px,2.4vw,32px);line-height:1.2;margin:0 0 20px">The 1974 Land Ordinances and the land certificate</h2>
+          <p style="font-size:17px;line-height:1.75;color:#28383f;margin:0 0 16px;max-width:68ch;text-wrap:pretty">The 1974 Ordinances reorganised land into national lands, state private and public property, and privately held registered land. The land certificate — the <em>titre foncier</em> — is the state’s official record of ownership and the starting point of any transaction.</p>
+          <p style="font-size:17px;line-height:1.75;color:#28383f;margin:0;max-width:68ch;text-wrap:pretty">We obtain certificates, act on transfers and mutations, and verify existing certificates at the land registry: chain of title, area and boundaries as surveyed, registered charges, and whether the certificate has been the subject of a challenge or a parallel grant.</p>
+        </section>
+
+        <section id="national" style="scroll-margin-top:110px;padding:44px 0;border-bottom:1px solid rgba(0,23,31,0.14)">
+          <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(25px,2.4vw,32px);line-height:1.2;margin:0 0 20px">National lands, state property, grants and concessions</h2>
+          <p style="font-size:17px;line-height:1.75;color:#28383f;margin:0;max-width:68ch;text-wrap:pretty">Land held by the state is allocated by temporary grant, long lease or concession, each with development conditions and a route to definitive title once those conditions are met. We advise applicants on the consultative-board process, on the conditions attached to a grant, and on what happens when a development programme slips behind the timetable in the instrument.</p>
+        </section>
+
+        <section id="customary" style="scroll-margin-top:110px;padding:44px 0;border-bottom:1px solid rgba(0,23,31,0.14)">
+          <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(25px,2.4vw,32px);line-height:1.2;margin:0 0 20px">Customary tenure and registered title</h2>
+          <p style="font-size:17px;line-height:1.75;color:#28383f;margin:0 0 16px;max-width:68ch;text-wrap:pretty">In the Northwest and Southwest regions in particular, land is frequently occupied and transferred under customary arrangements that the register does not reflect. A valid certificate and a long-standing customary claim can point to the same parcel.</p>
+          <p style="font-size:17px;line-height:1.75;color:#28383f;margin:0;max-width:68ch;text-wrap:pretty">We investigate occupation on the ground, engage with families and traditional authorities, document consents and releases properly, and advise on how a court is likely to treat the competing positions. Buyers who skip this step usually pay for it later.</p>
+        </section>
+
+        <section id="dd" style="scroll-margin-top:110px;padding:44px 0;border-bottom:1px solid rgba(0,23,31,0.14)">
+          <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(25px,2.4vw,32px);line-height:1.2;margin:0 0 20px">Acquisition due diligence, boundaries and competing claims</h2>
+          <p style="font-size:17px;line-height:1.75;color:#28383f;margin:0;max-width:68ch;text-wrap:pretty">Registry searches, instruction of a licensed surveyor, reconciliation of the survey plan with the certificate, physical inspection for occupation and encroachment, enquiry into pending proceedings, and structuring of the purchase so that price is released against registration rather than signature.</p>
+        </section>
+
+        <section id="sequence" style="scroll-margin-top:110px;padding:44px 0;border-bottom:1px solid rgba(0,23,31,0.14)">
+          <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(25px,2.4vw,32px);line-height:1.2;margin:0 0 12px">Illustrative due-diligence sequence</h2>
+          <p style="font-size:14px;line-height:1.65;color:#6b7b82;margin:0 0 28px;max-width:66ch">Diagram — a simplified, illustrative sequence for a registered-land acquisition. It is not legal advice, and the steps in any particular matter will differ.</p>
+          <div style="display:grid;max-width:68ch;border-top:1px solid rgba(0,23,31,0.16)">
+            <div style="display:grid;grid-template-columns:52px 1fr;gap:20px;padding:18px 0;border-bottom:1px solid rgba(0,23,31,0.1)"><span style="font-family:ui-monospace,Menlo,monospace;font-size:13px;color:#007EA7">01</span><div><div style="font-size:16px;font-weight:600;margin-bottom:4px">Identify the parcel</div><p style="margin:0;font-size:15px;line-height:1.65;color:#4a5a61">Certificate number, location, stated area, registered holder.</p></div></div>
+            <div style="display:grid;grid-template-columns:52px 1fr;gap:20px;padding:18px 0;border-bottom:1px solid rgba(0,23,31,0.1)"><span style="font-family:ui-monospace,Menlo,monospace;font-size:13px;color:#007EA7">02</span><div><div style="font-size:16px;font-weight:600;margin-bottom:4px">Registry search</div><p style="margin:0;font-size:15px;line-height:1.65;color:#4a5a61">Chain of title, mutations, registered mortgages and restrictions.</p></div></div>
+            <div style="display:grid;grid-template-columns:52px 1fr;gap:20px;padding:18px 0;border-bottom:1px solid rgba(0,23,31,0.1)"><span style="font-family:ui-monospace,Menlo,monospace;font-size:13px;color:#007EA7">03</span><div><div style="font-size:16px;font-weight:600;margin-bottom:4px">Survey and boundary check</div><p style="margin:0;font-size:15px;line-height:1.65;color:#4a5a61">Licensed surveyor reconciles the plan with the certificate and with what is on the ground.</p></div></div>
+            <div style="display:grid;grid-template-columns:52px 1fr;gap:20px;padding:18px 0;border-bottom:1px solid rgba(0,23,31,0.1)"><span style="font-family:ui-monospace,Menlo,monospace;font-size:13px;color:#007EA7">04</span><div><div style="font-size:16px;font-weight:600;margin-bottom:4px">Occupation and customary enquiry</div><p style="margin:0;font-size:15px;line-height:1.65;color:#4a5a61">Site inspection; enquiry with neighbours, families and traditional authorities.</p></div></div>
+            <div style="display:grid;grid-template-columns:52px 1fr;gap:20px;padding:18px 0;border-bottom:1px solid rgba(0,23,31,0.1)"><span style="font-family:ui-monospace,Menlo,monospace;font-size:13px;color:#007EA7">05</span><div><div style="font-size:16px;font-weight:600;margin-bottom:4px">Disputes and encumbrances</div><p style="margin:0;font-size:15px;line-height:1.65;color:#4a5a61">Pending proceedings, expropriation notices, planning constraints, unpaid land tax.</p></div></div>
+            <div style="display:grid;grid-template-columns:52px 1fr;gap:20px;padding:18px 0;border-bottom:1px solid rgba(0,23,31,0.1)"><span style="font-family:ui-monospace,Menlo,monospace;font-size:13px;color:#007EA7">06</span><div><div style="font-size:16px;font-weight:600;margin-bottom:4px">Report and conditions</div><p style="margin:0;font-size:15px;line-height:1.65;color:#4a5a61">Findings, risks that can be cured before completion, and those that cannot.</p></div></div>
+            <div style="display:grid;grid-template-columns:52px 1fr;gap:20px;padding:18px 0;border-bottom:1px solid rgba(0,23,31,0.1)"><span style="font-family:ui-monospace,Menlo,monospace;font-size:13px;color:#007EA7">07</span><div><div style="font-size:16px;font-weight:600;margin-bottom:4px">Deed and notarial steps</div><p style="margin:0;font-size:15px;line-height:1.65;color:#4a5a61">Execution, duties and fees, price released against registration milestones.</p></div></div>
+            <div style="display:grid;grid-template-columns:52px 1fr;gap:20px;padding:18px 0"><span style="font-family:ui-monospace,Menlo,monospace;font-size:13px;color:#007EA7">08</span><div><div style="font-size:16px;font-weight:600;margin-bottom:4px">Registration of the transfer</div><p style="margin:0;font-size:15px;line-height:1.65;color:#4a5a61">Mutation recorded; updated certificate obtained and checked.</p></div></div>
+          </div>
+        </section>
+
+        <section id="leases" style="scroll-margin-top:110px;padding:44px 0;border-bottom:1px solid rgba(0,23,31,0.14)">
+          <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(25px,2.4vw,32px);line-height:1.2;margin:0 0 20px">Commercial and residential leases, ground leases</h2>
+          <p style="font-size:17px;line-height:1.75;color:#28383f;margin:0;max-width:68ch;text-wrap:pretty">Commercial leases under the Uniform Act on General Commercial Law, including renewal rights, rent review and the compensation payable on refusal to renew; residential tenancies; and long ground leases for industrial and retail development, where the interaction between the lease term and the tenant’s capital programme needs to be set out precisely.</p>
+        </section>
+
+        <section id="development" style="scroll-margin-top:110px;padding:44px 0;border-bottom:1px solid rgba(0,23,31,0.14)">
+          <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(25px,2.4vw,32px);line-height:1.2;margin:0 0 20px">Development and construction; permitting</h2>
+          <p style="font-size:17px;line-height:1.75;color:#28383f;margin:0;max-width:68ch;text-wrap:pretty">Development agreements, construction contracts and consultant appointments, performance security and retention, building and subdivision permits, environmental and social requirements, and the sequencing of approvals against funding drawdowns.</p>
+        </section>
+
+        <section id="mortgages" style="scroll-margin-top:110px;padding:44px 0;border-bottom:1px solid rgba(0,23,31,0.14)">
+          <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(25px,2.4vw,32px);line-height:1.2;margin:0 0 20px">Mortgages and land-based security</h2>
+          <p style="font-size:17px;line-height:1.75;color:#28383f;margin:0;max-width:68ch;text-wrap:pretty">Conventional and judicial mortgages over registered land, registration and ranking, security over leasehold interests and over land held under grant, releases on repayment, and enforcement by sale — including the practical obstacles enforcement meets where the land is occupied.</p>
+        </section>
+
+        <section id="expropriation" style="scroll-margin-top:110px;padding:44px 0;border-bottom:1px solid rgba(0,23,31,0.14)">
+          <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(25px,2.4vw,32px);line-height:1.2;margin:0 0 20px">Compulsory acquisition and compensation</h2>
+          <p style="font-size:17px;line-height:1.75;color:#28383f;margin:0;max-width:68ch;text-wrap:pretty">Acting for owners, occupiers and businesses affected by acquisition for public purposes: participating in the enquiry and valuation process, challenging the assessment of crops, structures and business losses, and pursuing payment where an award has been made but not settled.</p>
+        </section>
+
+        <section id="litigation" style="scroll-margin-top:110px;padding:44px 0 0">
+          <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(25px,2.4vw,32px);line-height:1.2;margin:0 0 20px">Land disputes and litigation strategy</h2>
+          <p style="font-size:17px;line-height:1.75;color:#28383f;margin:0 0 16px;max-width:68ch;text-wrap:pretty">Competing certificates, boundary and encroachment claims, family and succession disputes over land, challenges to the issue of a certificate, and injunctions to stop works pending trial. We advise early on whether a case is better resolved by negotiated release and re-registration than by judgment.</p>
+          <p style="font-size:13px;line-height:1.6;color:#6b7b82;margin:0;max-width:68ch">General information about the firm’s practice, not legal advice. No lawyer-client relationship arises from reading this page.</p>
+        </section>
+      </div>
+    </div>
+  </section>
+</div>
+</sc-if>
+
+<!-- ESTATE -->
+<sc-if value="{{ isEstate }}" hint-placeholder-val="{{ false }}">
+<div>
+  <section style="max-width:1360px;margin:0 auto;padding:clamp(48px,7vw,104px) clamp(20px,5vw,80px) clamp(36px,4vw,56px)">
+    <button onClick="{{ goPractices }}" style="background:none;border:0;padding:0;cursor:pointer;font-size:12px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#007EA7;margin-bottom:26px">← Practices</button>
+    <h1 style="font-family:Spectral,Georgia,serif;font-weight:300;font-size:clamp(36px,5.2vw,68px);line-height:1.06;letter-spacing:-0.02em;margin:0;max-width:22ch">Succession &amp; Probate</h1>
+    <p style="font-size:clamp(17px,1.4vw,20px);line-height:1.7;color:#38484f;max-width:66ch;margin:32px 0 0">We help families plan for succession and settle estates, including estates that include land and heirs living outside Cameroon.</p>
+  </section>
+  <hr style="border:0;border-top:1px solid rgba(0,23,31,0.14);margin:0" />
+  <section style="max-width:1360px;margin:0 auto;padding:clamp(40px,5vw,72px) clamp(20px,5vw,80px) clamp(56px,7vw,96px)">
+    <div style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px">
+      <div style="grid-column:4 / span 7;min-width:280px">
+        <section data-reveal="1" style="padding:0 0 40px;border-bottom:1px solid rgba(0,23,31,0.14)">
+          <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(24px,2.3vw,30px);margin:0 0 18px">Succession planning</h2>
+          <p style="font-size:17px;line-height:1.75;color:#28383f;margin:0 0 0px;max-width:68ch;text-wrap:pretty">Wills, the appointment of executors and guardians, and planning for family property and family businesses. Customary succession still governs many estates in practice and does not always produce the statutory result, particularly for spouses and children. We plan so that the question is settled in advance rather than argued after death.</p>
+        </section>
+        <section data-reveal="1" style="padding:40px 0;border-bottom:1px solid rgba(0,23,31,0.14)">
+          <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(24px,2.3vw,30px);margin:0 0 18px">Letters of administration</h2>
+          <p style="font-size:17px;line-height:1.75;color:#28383f;margin:0 0 0px;max-width:68ch;text-wrap:pretty">Where there is no will, we apply for letters of administration, identify the persons entitled to administer and inherit, collect and value the estate, and deal with land certificates and bank accounts held in the deceased’s name.</p>
+        </section>
+        <section data-reveal="1" style="padding:40px 0 0;">
+          <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(24px,2.3vw,30px);margin:0 0 18px">Probate matters</h2>
+          <p style="font-size:17px;line-height:1.75;color:#28383f;margin:0 0 16px;max-width:68ch;text-wrap:pretty">Applications for probate of a will, advice to executors on their duties, distribution to beneficiaries, and contested applications between family members. For heirs abroad we arrange local representation and coordinate with foreign proceedings.</p><p style="font-size:13px;line-height:1.6;color:#6b7b82;margin:0;max-width:68ch">General information about the firm’s practice, not legal advice.</p>
+        </section>
+      </div>
+    </div>
+  </section>
+</div>
+</sc-if>
+
+<!-- PEOPLE -->
+<sc-if value="{{ isPeople }}" hint-placeholder-val="{{ false }}">
+<div>
+  <section style="max-width:1360px;margin:0 auto;padding:clamp(48px,7vw,104px) clamp(20px,5vw,80px) clamp(32px,4vw,48px)">
+    <div style="font-size:11px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:#007EA7;margin-bottom:28px">People</div>
+    <h1 style="font-family:Spectral,Georgia,serif;font-weight:300;font-size:clamp(36px,5vw,64px);line-height:1.08;letter-spacing:-0.02em;margin:0;max-width:20ch">Our lawyers</h1>
+    <p style="font-size:16.5px;line-height:1.7;color:#38484f;max-width:64ch;margin:28px 0 0">Advocates admitted in Cameroon and Nigeria, practising from Douala and Buea.</p>
+  </section>
+  <hr style="border:0;border-top:1px solid rgba(0,23,31,0.14);margin:0" />
+  <section style="max-width:1360px;margin:0 auto;padding:clamp(40px,5vw,64px) clamp(20px,5vw,80px) clamp(56px,7vw,96px)">
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:clamp(28px,3vw,44px)">
+      <button onClick="{{ goFrancisca }}" data-reveal="1" style="text-align:left;background:none;border:0;padding:0;cursor:pointer">
+        <div style="position:relative;aspect-ratio:4/5;background:#e7ebed;overflow:hidden;margin-bottom:16px"><img src="../assets/francisca-abunaw.png" alt="Francisca E. Abunaw" style="width:100%;height:100%;object-fit:cover;object-position:50% 20%;filter:grayscale(1) contrast(1.06) brightness(0.98)" /></div>
+        <h3 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:20px;margin:0 0 6px;color:#00171F">Francisca E. Abunaw</h3>
+        <div style="font-size:13.5px;color:#4a5a61;line-height:1.6">Managing Partner<br />Douala</div>
+        <div style="font-size:13px;font-weight:500;color:#007EA7;margin-top:10px">View profile</div>
+      </button>
+      <button onClick="{{ goKelly }}" data-reveal="1" style="text-align:left;background:none;border:0;padding:0;cursor:pointer">
+        <div style="position:relative;aspect-ratio:4/5;background:#e7ebed;overflow:hidden;margin-bottom:16px"><img src="../assets/kelly-agbor.jpeg" alt="Orock Kelly Agbor" style="width:100%;height:100%;object-fit:cover;object-position:51% 0%;filter:grayscale(1) contrast(1.06) brightness(0.98)" /></div>
+        <h3 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:20px;margin:0 0 6px;color:#00171F">Orock Kelly Agbor</h3>
+        <div style="font-size:13.5px;color:#4a5a61;line-height:1.6">Associate<br />Buea</div>
+        <div style="font-size:13px;font-weight:500;color:#007EA7;margin-top:10px">View profile</div>
+      </button>
+      <button onClick="{{ goDonaldson }}" data-reveal="1" style="text-align:left;background:none;border:0;padding:0;cursor:pointer">
+        <div style="position:relative;aspect-ratio:4/5;background:#e7ebed;overflow:hidden;margin-bottom:16px"><img src="../assets/donaldson-agbor.jpeg" alt="Orock Donaldson Agbor" style="position:absolute;width:200%;max-width:none;left:-85%;top:-30%;filter:grayscale(1) contrast(1.06) brightness(0.98)" /></div>
+        <h3 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:20px;margin:0 0 6px;color:#00171F">Orock Donaldson Agbor</h3>
+        <div style="font-size:13.5px;color:#4a5a61;line-height:1.6">Associate<br />Buea</div>
+        <div style="font-size:13px;font-weight:500;color:#007EA7;margin-top:10px">View profile</div>
+      </button>
+    </div>
+  </section>
+</div>
+</sc-if>
+
+<!-- BIO -->
+<sc-if value="{{ isBioF }}" hint-placeholder-val="{{ false }}">
+<div>
+  <section style="max-width:1360px;margin:0 auto;padding:clamp(40px,6vw,88px) clamp(20px,5vw,80px) clamp(56px,7vw,96px)">
+    <button onClick="{{ goPeople }}" style="background:none;border:0;padding:0;cursor:pointer;font-size:12px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#007EA7;margin-bottom:32px">← People</button>
+    <div style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(28px,3vw,48px)">
+      <div style="grid-column:span 4;min-width:230px">
+        <div style="position:relative;aspect-ratio:4/5;background:#e7ebed;overflow:hidden"><img src="../assets/francisca-abunaw.png" alt="Francisca E. Abunaw" style="width:100%;height:100%;object-fit:cover;object-position:50% 20%;filter:grayscale(1) contrast(1.06) brightness(0.98)" /></div>
+        <div style="border-top:1px solid rgba(0,23,31,0.16);margin-top:24px;padding-top:18px;display:grid;gap:16px">
+          <div><div style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#6b7b82;margin-bottom:5px">Office</div><div style="font-size:15px;color:#00171F">Douala</div></div>
+          <div><div style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#6b7b82;margin-bottom:5px">Admissions</div><div style="font-size:15px;line-height:1.55;color:#00171F">Cameroon Bar Association<br />Nigerian Bar</div></div>
+          <div><div style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#6b7b82;margin-bottom:5px">Contact</div><div style="font-family:ui-monospace,Menlo,monospace;font-size:13px;line-height:1.7;color:#6b7b82"><a href="mailto:francisca.abunaw@abunawlaw.com" style="font-family:Archivo,Helvetica,sans-serif;font-size:14px">francisca.abunaw@abunawlaw.com</a><br />[+237 telephone]</div></div>
+        </div>
+      </div>
+      <div style="grid-column:span 7;min-width:280px">
+        <h1 style="font-family:Spectral,Georgia,serif;font-weight:300;font-size:clamp(34px,4.4vw,56px);line-height:1.08;letter-spacing:-0.02em;margin:0">Francisca E. Abunaw</h1>
+        <div style="font-size:16px;color:#38484f;margin:14px 0 0">Managing Partner</div>
+        <p style="font-family:Spectral,Georgia,serif;font-size:clamp(19px,1.7vw,22px);line-height:1.55;color:#00171F;margin:32px 0 22px;max-width:60ch;text-wrap:pretty">Francisca Abunaw is the Managing Partner of Abunaw &amp; Associates. She advises companies on commercial contracts, corporate compliance and structuring, and succession matters, with particular depth in OHADA and CEMAC law.</p>
+        <p style="font-size:17px;line-height:1.75;color:#28383f;margin:0 0 18px;max-width:66ch;text-wrap:pretty">Admitted to practise in both Cameroon and Nigeria, Francisca has six years of experience in legal practice. She has advised more than 30 companies across banking and finance, payments, telecommunications, logistics, and oil and gas, on matters including corporate structuring and restructuring, commercial transactions, labour law, data protection, consumer protection and real estate. She has guided around 12 businesses through incorporation.</p>
+        <p style="font-size:17px;line-height:1.75;color:#28383f;margin:0 0 18px;max-width:66ch;text-wrap:pretty">Before founding the firm, Francisca was an Associate Attorney at Etah-Nan &amp; Co. She has also acted as consultant to human resources firms and non-governmental organisations, reviewing and strengthening their internal governance frameworks — work that informs her approach to compliance and organisational policy.</p>
+        <p style="font-size:17px;line-height:1.75;color:#28383f;margin:0 0 18px;max-width:66ch;text-wrap:pretty">Her practice also includes legal translation, allowing clients to rely on documents that hold their meaning across English and French.</p>
+        <p style="font-size:17px;line-height:1.75;color:#28383f;margin:0 0 18px;max-width:66ch;text-wrap:pretty">Francisca is the founder of <em>The Law Demystified</em>, a platform that makes legal concepts accessible to a wider audience.</p>
+        <section style="margin-top:40px;padding-top:24px;border-top:1px solid rgba(0,23,31,0.16)"><h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:24px;margin:0 0 16px">Practice focus</h2><ul style="margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px 28px"><li style="font-size:15.5px;line-height:1.5;color:#28383f;border-top:1px solid rgba(0,23,31,0.1);padding-top:10px">Contract drafting and review</li><li style="font-size:15.5px;line-height:1.5;color:#28383f;border-top:1px solid rgba(0,23,31,0.1);padding-top:10px">Corporate compliance and governance</li><li style="font-size:15.5px;line-height:1.5;color:#28383f;border-top:1px solid rgba(0,23,31,0.1);padding-top:10px">Corporate structuring and restructuring</li><li style="font-size:15.5px;line-height:1.5;color:#28383f;border-top:1px solid rgba(0,23,31,0.1);padding-top:10px">Incorporation</li><li style="font-size:15.5px;line-height:1.5;color:#28383f;border-top:1px solid rgba(0,23,31,0.1);padding-top:10px">Labour and employment</li><li style="font-size:15.5px;line-height:1.5;color:#28383f;border-top:1px solid rgba(0,23,31,0.1);padding-top:10px">Data protection</li><li style="font-size:15.5px;line-height:1.5;color:#28383f;border-top:1px solid rgba(0,23,31,0.1);padding-top:10px">Consumer protection</li><li style="font-size:15.5px;line-height:1.5;color:#28383f;border-top:1px solid rgba(0,23,31,0.1);padding-top:10px">Real estate</li><li style="font-size:15.5px;line-height:1.5;color:#28383f;border-top:1px solid rgba(0,23,31,0.1);padding-top:10px">Succession</li><li style="font-size:15.5px;line-height:1.5;color:#28383f;border-top:1px solid rgba(0,23,31,0.1);padding-top:10px">Legal translation</li></ul></section>
+        <section style="margin-top:40px;padding-top:24px;border-top:1px solid rgba(0,23,31,0.16)"><h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:24px;margin:0 0 16px">Sectors</h2><ul style="margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px 28px"><li style="font-size:15.5px;line-height:1.5;color:#28383f;border-top:1px solid rgba(0,23,31,0.1);padding-top:10px">Banking and finance</li><li style="font-size:15.5px;line-height:1.5;color:#28383f;border-top:1px solid rgba(0,23,31,0.1);padding-top:10px">Payments</li><li style="font-size:15.5px;line-height:1.5;color:#28383f;border-top:1px solid rgba(0,23,31,0.1);padding-top:10px">Telecommunications</li><li style="font-size:15.5px;line-height:1.5;color:#28383f;border-top:1px solid rgba(0,23,31,0.1);padding-top:10px">Logistics</li><li style="font-size:15.5px;line-height:1.5;color:#28383f;border-top:1px solid rgba(0,23,31,0.1);padding-top:10px">Oil and gas</li><li style="font-size:15.5px;line-height:1.5;color:#28383f;border-top:1px solid rgba(0,23,31,0.1);padding-top:10px">Non-profit and NGOs</li></ul></section>
+      </div>
+    </div>
+  </section>
+</div>
+</sc-if>
+
+<sc-if value="{{ isBioK }}" hint-placeholder-val="{{ false }}">
+<div>
+  <section style="max-width:1360px;margin:0 auto;padding:clamp(40px,6vw,88px) clamp(20px,5vw,80px) clamp(56px,7vw,96px)">
+    <button onClick="{{ goPeople }}" style="background:none;border:0;padding:0;cursor:pointer;font-size:12px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#007EA7;margin-bottom:32px">← People</button>
+    <div style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(28px,3vw,48px)">
+      <div style="grid-column:span 4;min-width:230px">
+        <div style="position:relative;aspect-ratio:4/5;background:#e7ebed;overflow:hidden"><img src="../assets/kelly-agbor.jpeg" alt="Orock Kelly Agbor" style="width:100%;height:100%;object-fit:cover;object-position:51% 0%;filter:grayscale(1) contrast(1.06) brightness(0.98)" /></div>
+        <div style="border-top:1px solid rgba(0,23,31,0.16);margin-top:24px;padding-top:18px;display:grid;gap:16px">
+          <div><div style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#6b7b82;margin-bottom:5px">Office</div><div style="font-size:15px;color:#00171F">Buea</div></div>
+          <div><div style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#6b7b82;margin-bottom:5px">Admissions</div><div style="font-size:15px;line-height:1.55;color:#00171F">Barrister, Solicitor and Notary Public of the Supreme Court of Nigeria<br />Cameroon Bar Association</div></div>
+          <div><div style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#6b7b82;margin-bottom:5px">Contact</div><div style="font-family:ui-monospace,Menlo,monospace;font-size:13px;line-height:1.7;color:#6b7b82"><a href="mailto:kelly.orock@abunawlaw.com" style="font-family:Archivo,Helvetica,sans-serif;font-size:14px">kelly.orock@abunawlaw.com</a><br />[+237 telephone]</div></div>
+        </div>
+      </div>
+      <div style="grid-column:span 7;min-width:280px">
+        <h1 style="font-family:Spectral,Georgia,serif;font-weight:300;font-size:clamp(34px,4.4vw,56px);line-height:1.08;letter-spacing:-0.02em;margin:0">Orock Kelly Agbor</h1>
+        <div style="font-size:16px;color:#38484f;margin:14px 0 0">Associate</div>
+        <p style="font-family:Spectral,Georgia,serif;font-size:clamp(19px,1.7vw,22px);line-height:1.55;color:#00171F;margin:32px 0 22px;max-width:60ch;text-wrap:pretty">Orock Kelly Agbor is an Associate in the firm’s Buea office, where she advises and represents clients in labour, family and criminal matters, and in cases raising questions of human rights.</p>
+        <p style="font-size:17px;line-height:1.75;color:#28383f;margin:0 0 18px;max-width:66ch;text-wrap:pretty">A Barrister, Solicitor and Notary Public of the Supreme Court of Nigeria and a member of the Cameroon Bar Association, Kelly brings five years of professional experience to her practice.</p>
+        <p style="font-size:17px;line-height:1.75;color:#28383f;margin:0 0 18px;max-width:66ch;text-wrap:pretty">She holds a Bachelor of Laws with Honours and a Master of Laws in International Law. Her approach to representation is diligent and client-centred, grounded in a firm commitment to the ethical standards of the profession.</p>
+        <section style="margin-top:40px;padding-top:24px;border-top:1px solid rgba(0,23,31,0.16)"><h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:24px;margin:0 0 16px">Practice focus</h2><ul style="margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px 28px"><li style="font-size:15.5px;line-height:1.5;color:#28383f;border-top:1px solid rgba(0,23,31,0.1);padding-top:10px">Labour and employment</li><li style="font-size:15.5px;line-height:1.5;color:#28383f;border-top:1px solid rgba(0,23,31,0.1);padding-top:10px">Family law</li><li style="font-size:15.5px;line-height:1.5;color:#28383f;border-top:1px solid rgba(0,23,31,0.1);padding-top:10px">Criminal litigation</li><li style="font-size:15.5px;line-height:1.5;color:#28383f;border-top:1px solid rgba(0,23,31,0.1);padding-top:10px">Human rights</li></ul></section>
+        <section style="margin-top:40px;padding-top:24px;border-top:1px solid rgba(0,23,31,0.16)"><h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:24px;margin:0 0 16px">Education</h2><ul style="margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px 28px"><li style="font-size:15.5px;line-height:1.5;color:#28383f;border-top:1px solid rgba(0,23,31,0.1);padding-top:10px">LL.M, International Law</li><li style="font-size:15.5px;line-height:1.5;color:#28383f;border-top:1px solid rgba(0,23,31,0.1);padding-top:10px">LL.B (Hons)</li></ul></section>
+      </div>
+    </div>
+  </section>
+</div>
+</sc-if>
+
+<sc-if value="{{ isBioD }}" hint-placeholder-val="{{ false }}">
+<div>
+  <section style="max-width:1360px;margin:0 auto;padding:clamp(40px,6vw,88px) clamp(20px,5vw,80px) clamp(56px,7vw,96px)">
+    <button onClick="{{ goPeople }}" style="background:none;border:0;padding:0;cursor:pointer;font-size:12px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#007EA7;margin-bottom:32px">← People</button>
+    <div style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(28px,3vw,48px)">
+      <div style="grid-column:span 4;min-width:230px">
+        <div style="position:relative;aspect-ratio:4/5;background:#e7ebed;overflow:hidden"><img src="../assets/donaldson-agbor.jpeg" alt="Orock Donaldson Agbor" style="position:absolute;width:200%;max-width:none;left:-85%;top:-30%;filter:grayscale(1) contrast(1.06) brightness(0.98)" /></div>
+        <div style="border-top:1px solid rgba(0,23,31,0.16);margin-top:24px;padding-top:18px;display:grid;gap:16px">
+          <div><div style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#6b7b82;margin-bottom:5px">Office</div><div style="font-size:15px;color:#00171F">Buea</div></div>
+          <div><div style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#6b7b82;margin-bottom:5px">Admissions</div><div style="font-size:15px;line-height:1.55;color:#00171F">Advocate of the Supreme Court of Cameroon<br />Nigerian Bar Association</div></div>
+          <div><div style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#6b7b82;margin-bottom:5px">Contact</div><div style="font-family:ui-monospace,Menlo,monospace;font-size:13px;line-height:1.7;color:#6b7b82"><a href="mailto:donaldson.agbor@abunawlaw.com" style="font-family:Archivo,Helvetica,sans-serif;font-size:14px">donaldson.agbor@abunawlaw.com</a><br />[+237 telephone]</div></div>
+        </div>
+      </div>
+      <div style="grid-column:span 7;min-width:280px">
+        <h1 style="font-family:Spectral,Georgia,serif;font-weight:300;font-size:clamp(34px,4.4vw,56px);line-height:1.08;letter-spacing:-0.02em;margin:0">Orock Donaldson Agbor</h1>
+        <div style="font-size:16px;color:#38484f;margin:14px 0 0">Associate</div>
+        <p style="font-family:Spectral,Georgia,serif;font-size:clamp(19px,1.7vw,22px);line-height:1.55;color:#00171F;margin:32px 0 22px;max-width:60ch;text-wrap:pretty">Orock Donaldson Agbor is an Associate in the firm’s Buea office. His practice spans criminal litigation, probate, land law and succession.</p>
+        <p style="font-size:17px;line-height:1.75;color:#28383f;margin:0 0 18px;max-width:66ch;text-wrap:pretty">An Advocate of the Supreme Court of Cameroon and a member of the Nigerian Bar Association, Donaldson has five years of legal practice. He acts for clients in matters ranging from criminal defence to estate administration and property disputes.</p>
+        <p style="font-size:17px;line-height:1.75;color:#28383f;margin:0 0 18px;max-width:66ch;text-wrap:pretty">He is known for a meticulous approach to dispute resolution, pairing courtroom advocacy with close attention to procedure — an approach that makes him a trusted adviser to clients in complex and contested matters.</p>
+        <section style="margin-top:40px;padding-top:24px;border-top:1px solid rgba(0,23,31,0.16)"><h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:24px;margin:0 0 16px">Practice focus</h2><ul style="margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px 28px"><li style="font-size:15.5px;line-height:1.5;color:#28383f;border-top:1px solid rgba(0,23,31,0.1);padding-top:10px">Criminal litigation and defence</li><li style="font-size:15.5px;line-height:1.5;color:#28383f;border-top:1px solid rgba(0,23,31,0.1);padding-top:10px">Probate and estate administration</li><li style="font-size:15.5px;line-height:1.5;color:#28383f;border-top:1px solid rgba(0,23,31,0.1);padding-top:10px">Land law and property disputes</li><li style="font-size:15.5px;line-height:1.5;color:#28383f;border-top:1px solid rgba(0,23,31,0.1);padding-top:10px">Succession</li></ul></section>
+      </div>
+    </div>
+  </section>
+</div>
+</sc-if>
+
+<!-- ABOUT -->
+<sc-if value="{{ isAbout }}" hint-placeholder-val="{{ false }}">
+<div>
+  <section style="max-width:1360px;margin:0 auto;padding:clamp(48px,7vw,104px) clamp(20px,5vw,80px) clamp(40px,5vw,64px)">
+    <div style="font-size:11px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:#007EA7;margin-bottom:28px">About the firm</div>
+    <h1 style="font-family:Spectral,Georgia,serif;font-weight:300;font-size:clamp(36px,5vw,64px);line-height:1.08;letter-spacing:-0.02em;margin:0;max-width:24ch">A Cameroonian firm built for cross-border work</h1>
+  </section>
+  <hr style="border:0;border-top:1px solid rgba(0,23,31,0.14);margin:0" />
+  <section style="max-width:1360px;margin:0 auto;padding:clamp(40px,5vw,72px) clamp(20px,5vw,80px)">
+    <div style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px">
+      <div style="grid-column:span 4;min-width:220px">
+        <div style="display:grid;gap:26px">
+          <div style="border-top:1px solid rgba(0,23,31,0.2);padding-top:14px"><div style="font-family:Spectral,Georgia,serif;font-size:32px;line-height:1.1">Douala · Buea</div><div style="font-size:13.5px;color:#4a5a61;margin-top:6px">Offices</div></div>
+          <div style="border-top:1px solid rgba(0,23,31,0.2);padding-top:14px"><div style="font-family:Spectral,Georgia,serif;font-size:32px;line-height:1.1">Cameroon · Nigeria</div><div style="font-size:13.5px;color:#4a5a61;margin-top:6px">Bar admissions</div></div>
+          <div style="border-top:1px solid rgba(0,23,31,0.2);padding-top:14px"><div style="font-family:Spectral,Georgia,serif;font-size:32px;line-height:1.1">English · French</div><div style="font-size:13.5px;color:#4a5a61;margin-top:6px">Working languages</div></div>
+        </div>
+      </div>
+      <div style="grid-column:span 7;min-width:280px">
+        <p style="font-size:17px;line-height:1.75;color:#28383f;margin:0 0 16px;max-width:68ch;text-wrap:pretty">Abunaw &amp; Associates is a Cameroonian law firm advising businesses, organisations and individuals from offices in Douala and Buea. Our lawyers are admitted in Cameroon and Nigeria, and we act in English and French.</p>
+        <p style="font-size:17px;line-height:1.75;color:#28383f;margin:0 0 16px;max-width:68ch;text-wrap:pretty">Cameroon applies common law in the Northwest and Southwest regions and civil law elsewhere, while the OHADA Uniform Acts and CEMAC regulations govern much of commercial life nationwide. Our clients need counsel who can work across those systems, in both languages, without losing meaning between them.</p>
+        <p style="font-size:17px;line-height:1.75;color:#28383f;margin:0 0 0px;max-width:68ch;text-wrap:pretty">Our practice runs from corporate structuring, commercial transactions and compliance to succession, land, employment, family and criminal matters. Clients deal directly with the lawyer handling their matter from first instruction to conclusion.</p>
+      </div>
+    </div>
+  </section>
+  <section data-reveal="1" style="max-width:1360px;margin:0 auto;padding:clamp(24px,4vw,56px) clamp(20px,5vw,80px) clamp(56px,7vw,96px)">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:clamp(28px,3vw,44px)">
+      <div style="border-top:1px solid rgba(0,23,31,0.2);padding-top:18px"><h3 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:21px;margin:0 0 10px">Two legal traditions</h3><p style="margin:0;font-size:15.5px;line-height:1.7;color:#4a5a61">Lawyers who work in common law and civil law, and in OHADA and CEMAC law, rather than translating between them.</p></div>
+      <div style="border-top:1px solid rgba(0,23,31,0.2);padding-top:18px"><h3 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:21px;margin:0 0 10px">Two jurisdictions</h3><p style="margin:0;font-size:15.5px;line-height:1.7;color:#4a5a61">Admissions in Cameroon and Nigeria, for clients whose business or family spans both.</p></div>
+      <div style="border-top:1px solid rgba(0,23,31,0.2);padding-top:18px"><h3 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:21px;margin:0 0 10px">Plain advice</h3><p style="margin:0;font-size:15.5px;line-height:1.7;color:#4a5a61">A clear view first, then the reasoning. Clients making decisions need the answer before the authorities.</p></div>
+      <div style="border-top:1px solid rgba(0,23,31,0.2);padding-top:18px"><h3 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:21px;margin:0 0 10px">Legal education</h3><p style="margin:0;font-size:15.5px;line-height:1.7;color:#4a5a61">Through <em>The Law Demystified</em>, the firm’s founder makes legal concepts accessible to a wider audience.</p></div>
+    </div>
+  </section>
+</div>
+</sc-if>
+
+<!-- INSIGHTS -->
+<sc-if value="{{ isInsights }}" hint-placeholder-val="{{ false }}">
+<div>
+  <section style="max-width:1360px;margin:0 auto;padding:clamp(48px,7vw,104px) clamp(20px,5vw,80px) clamp(32px,4vw,48px)">
+    <div style="font-size:11px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:#007EA7;margin-bottom:28px">Insights</div>
+    <h1 style="font-family:Spectral,Georgia,serif;font-weight:300;font-size:clamp(36px,5vw,64px);line-height:1.08;letter-spacing:-0.02em;margin:0;max-width:20ch">Notes on Cameroonian and OHADA practice</h1>
+    <p style="font-family:ui-monospace,Menlo,monospace;font-size:13.5px;line-height:1.7;color:#6b7b82;max-width:66ch;margin:28px 0 0">[Headlines below are proposed subjects. Publication dates and final copy to be confirmed by the firm.]</p>
+  </section>
+  <hr style="border:0;border-top:1px solid rgba(0,23,31,0.14);margin:0" />
+  <section style="max-width:1360px;margin:0 auto;padding:0 clamp(20px,5vw,80px) clamp(56px,7vw,96px)">
+    <button onClick="{{ goArticle }}" data-reveal="1" style="width:100%;text-align:left;background:none;border:0;border-bottom:1px solid rgba(0,23,31,0.14);padding:clamp(24px,3vw,36px) 0;cursor:pointer;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px">
+      <div style="grid-column:span 3;min-width:150px;font-family:ui-monospace,Menlo,monospace;font-size:12.5px;color:#6b7b82">[month year]<br />Finance</div>
+      <div style="grid-column:span 8;min-width:260px"><h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(22px,2.2vw,29px);line-height:1.25;margin:0 0 10px;color:#00171F;max-width:34ch">Registering security at the RCCM: what lenders get wrong</h2><p style="margin:0;font-size:15.5px;line-height:1.7;color:#4a5a61;max-width:62ch">Perfection under the Uniform Act on Secured Transactions is a registration question, and lapsed renewals are the most common reason a lender finds itself ranked behind a later interest.</p></div>
+    </button>
+    <div data-reveal="1" style="border-bottom:1px solid rgba(0,23,31,0.14);padding:clamp(24px,3vw,36px) 0;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px">
+      <div style="grid-column:span 3;min-width:150px;font-family:ui-monospace,Menlo,monospace;font-size:12.5px;color:#6b7b82">[month year]<br />Land</div>
+      <div style="grid-column:span 8;min-width:260px"><h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(22px,2.2vw,29px);line-height:1.25;margin:0 0 10px;max-width:34ch">Customary tenure and registered title in the Southwest</h2><p style="margin:0;font-size:15.5px;line-height:1.7;color:#4a5a61;max-width:62ch">What a buyer should do when a valid land certificate and a long-standing customary claim point to the same parcel.</p></div>
+    </div>
+    <div data-reveal="1" style="border-bottom:1px solid rgba(0,23,31,0.14);padding:clamp(24px,3vw,36px) 0;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px">
+      <div style="grid-column:span 3;min-width:150px;font-family:ui-monospace,Menlo,monospace;font-size:12.5px;color:#6b7b82">[month year]<br />Corporate</div>
+      <div style="grid-column:span 8;min-width:260px"><h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(22px,2.2vw,29px);line-height:1.25;margin:0 0 10px;max-width:34ch">Choosing between an SA, a SARL and an SAS</h2><p style="margin:0;font-size:15.5px;line-height:1.7;color:#4a5a61;max-width:62ch">How governance, transfer restrictions and audit obligations differ, and why the choice is expensive to revisit after trading begins.</p></div>
+    </div>
+    <div data-reveal="1" style="border-bottom:1px solid rgba(0,23,31,0.14);padding:clamp(24px,3vw,36px) 0;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px">
+      <div style="grid-column:span 3;min-width:150px;font-family:ui-monospace,Menlo,monospace;font-size:12.5px;color:#6b7b82">[month year]<br />Disputes</div>
+      <div style="grid-column:span 8;min-width:260px"><h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(22px,2.2vw,29px);line-height:1.25;margin:0 0 10px;max-width:34ch">Drafting an arbitration clause that works in Cameroon</h2><p style="margin:0;font-size:15.5px;line-height:1.7;color:#4a5a61;max-width:62ch">Seat, language, institution and interim relief — and how the CCJA’s role changes the calculation for cross-border contracts.</p></div>
+    </div>
+    <div data-reveal="1" style="border-bottom:1px solid rgba(0,23,31,0.14);padding:clamp(24px,3vw,36px) 0;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px">
+      <div style="grid-column:span 3;min-width:150px;font-family:ui-monospace,Menlo,monospace;font-size:12.5px;color:#6b7b82">[month year]<br />Succession</div>
+      <div style="grid-column:span 8;min-width:260px"><h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(22px,2.2vw,29px);line-height:1.25;margin:0 0 10px;max-width:34ch">Estates that straddle borders: a note for diaspora families</h2><p style="margin:0;font-size:15.5px;line-height:1.7;color:#4a5a61;max-width:62ch">Coordinating a Cameroonian grant with a foreign one, and untangling title that has passed informally through several generations.</p></div>
+    </div>
+  </section>
+</div>
+</sc-if>
+
+<!-- ARTICLE -->
+<sc-if value="{{ isArticle }}" hint-placeholder-val="{{ false }}">
+<div>
+  <section style="max-width:1360px;margin:0 auto;padding:clamp(40px,6vw,88px) clamp(20px,5vw,80px) clamp(24px,3vw,40px)">
+    <button onClick="{{ goInsights }}" style="background:none;border:0;padding:0;cursor:pointer;font-size:12px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#007EA7;margin-bottom:32px">← Insights</button>
+    <div style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px">
+      <div style="grid-column:3 / span 8;min-width:280px">
+        <div style="font-family:ui-monospace,Menlo,monospace;font-size:12.5px;color:#6b7b82;margin-bottom:22px">[month year] · Banking &amp; Finance</div>
+        <h1 style="font-family:Spectral,Georgia,serif;font-weight:300;font-size:clamp(32px,4.4vw,56px);line-height:1.1;letter-spacing:-0.02em;margin:0;max-width:26ch">Registering security at the RCCM: what lenders get wrong</h1>
+        <div style="font-size:15px;color:#4a5a61;margin:26px 0 0">By <span style="font-family:ui-monospace,Menlo,monospace;font-size:13.5px;color:#6b7b82">[author name, title]</span></div>
+      </div>
+    </div>
+  </section>
+  <hr style="border:0;border-top:1px solid rgba(0,23,31,0.14);margin:0" />
+  <section style="max-width:1360px;margin:0 auto;padding:clamp(36px,4vw,56px) clamp(20px,5vw,80px) clamp(56px,7vw,96px)">
+    <div style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px">
+      <div style="grid-column:3 / span 7;min-width:280px">
+        <p style="font-family:Spectral,Georgia,serif;font-size:clamp(19px,1.8vw,23px);line-height:1.6;color:#00171F;margin:0 0 32px;max-width:62ch">Security taken over assets in Cameroon is only as good as its registration. The documents are rarely the problem; the register usually is.</p>
+        <p style="font-size:17px;line-height:1.8;color:#28383f;margin:0 0 20px;max-width:68ch;text-wrap:pretty">The OHADA Uniform Act on Secured Transactions gives lenders a wide menu: pledges of shares, bank accounts, receivables, stock and equipment, assignments by way of security, and the guarantee and counter-guarantee regime. Most of these interests take effect against third parties only once they are entered in the Trade and Personal Property Credit Register — the RCCM — held at the registry of the competent court.</p>
+        <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(23px,2.2vw,29px);line-height:1.25;margin:40px 0 16px">Registration is not a formality</h2>
+        <p style="font-size:17px;line-height:1.8;color:#28383f;margin:0 0 20px;max-width:68ch;text-wrap:pretty">Signing does not create priority. Where two lenders take security over the same asset, the order of entry in the register ordinarily decides which of them is paid first. A facility that closed on time but registered late can sit behind a competitor that documented the same collateral a month later.</p>
+        <p style="font-size:17px;line-height:1.8;color:#28383f;margin:0 0 20px;max-width:68ch;text-wrap:pretty">Registrations also expire. A registered interest is entered for a period, and a renewal missed during a refinancing or a change of agent leaves the lender unsecured against third parties while the loan is still outstanding. In portfolio reviews this is the single most common defect we find.</p>
+        <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(23px,2.2vw,29px);line-height:1.25;margin:40px 0 16px">Three practical points</h2>
+        <ol style="margin:0 0 20px;padding-left:22px;max-width:68ch;display:grid;gap:12px">
+          <li style="font-size:17px;line-height:1.75;color:#28383f">Make registration a condition subsequent with a hard date and evidence requirement, not a covenant to use reasonable endeavours.</li>
+          <li style="font-size:17px;line-height:1.75;color:#28383f">Keep a renewal calendar at agent level, not at borrower level, and test it at every amendment.</li>
+          <li style="font-size:17px;line-height:1.75;color:#28383f">Search the register before each drawdown of a revolving facility, not only at closing.</li>
+        </ol>
+        <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(23px,2.2vw,29px);line-height:1.25;margin:40px 0 16px">Enforcement</h2>
+        <p style="font-size:17px;line-height:1.8;color:#28383f;margin:0 0 20px;max-width:68ch;text-wrap:pretty">A properly registered interest opens routes that do not require a full trial on the merits. Those routes are procedural and unforgiving: the notices, time limits and proofs are prescribed, and a step taken out of order can restart the process. Lenders should plan enforcement while documenting the facility, when the borrower is still cooperative and the register is still clean.</p>
+        <p style="font-family:ui-monospace,Menlo,monospace;font-size:13px;line-height:1.7;color:#6b7b82;margin:40px 0 0;max-width:68ch;border-top:1px solid rgba(0,23,31,0.16);padding-top:20px">This article is general information about Cameroonian and OHADA practice. It is not legal advice, does not address any particular transaction, and no lawyer-client relationship arises from reading it. [Sample article template — final copy, author and date to be supplied by the firm.]</p>
+      </div>
+    </div>
+  </section>
+</div>
+</sc-if>
+
+<!-- CAREERS -->
+<sc-if value="{{ isCareers }}" hint-placeholder-val="{{ false }}">
+<div>
+  <section style="max-width:1360px;margin:0 auto;padding:clamp(48px,7vw,104px) clamp(20px,5vw,80px) clamp(40px,5vw,64px)">
+    <div style="font-size:11px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:#007EA7;margin-bottom:28px">Careers</div>
+    <h1 style="font-family:Spectral,Georgia,serif;font-weight:300;font-size:clamp(36px,5vw,64px);line-height:1.08;letter-spacing:-0.02em;margin:0;max-width:22ch">Practise in two traditions</h1>
+    <p style="font-size:17.5px;line-height:1.75;color:#38484f;max-width:66ch;margin:32px 0 0">Our lawyers handle OHADA commercial work and common-law advocacy in the same week, in English and French. It is demanding training, and it is the reason clients instruct us.</p>
+  </section>
+  <hr style="border:0;border-top:1px solid rgba(0,23,31,0.14);margin:0" />
+  <section style="max-width:1360px;margin:0 auto;padding:clamp(40px,5vw,72px) clamp(20px,5vw,80px)">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(28px,3vw,44px)">
+      <div style="border-top:1px solid rgba(0,23,31,0.2);padding-top:18px"><h3 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:21px;margin:0 0 10px">Pupils and trainees</h3><p style="margin:0;font-size:15.5px;line-height:1.7;color:#4a5a61">Structured rotation through corporate, land and disputes, with drafting supervised by a partner from the first month.</p></div>
+      <div style="border-top:1px solid rgba(0,23,31,0.2);padding-top:18px"><h3 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:21px;margin:0 0 10px">Associates</h3><p style="margin:0;font-size:15.5px;line-height:1.7;color:#4a5a61">Small teams, named responsibility on matters, and direct client contact earlier than a larger firm would allow.</p></div>
+      <div style="border-top:1px solid rgba(0,23,31,0.2);padding-top:18px"><h3 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:21px;margin:0 0 10px">Lateral hires</h3><p style="margin:0;font-size:15.5px;line-height:1.7;color:#4a5a61">We are interested in lawyers with OHADA transactional depth, land expertise in the Anglophone regions, or litigation experience in the Southwest.</p></div>
+      <div style="border-top:1px solid rgba(0,23,31,0.2);padding-top:18px"><h3 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:21px;margin:0 0 10px">Business services</h3><p style="margin:0;font-size:15.5px;line-height:1.7;color:#4a5a61">Roles in knowledge management, finance and client operations in Douala and Buea.</p></div>
+    </div>
+  </section>
+  <section data-reveal="1" style="max-width:1360px;margin:0 auto;padding:clamp(24px,4vw,56px) clamp(20px,5vw,80px) clamp(56px,7vw,96px)">
+    <div style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px">
+      <div style="grid-column:span 4;min-width:220px"><h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(24px,2.6vw,32px);margin:0;max-width:14ch">Current openings</h2></div>
+      <div style="grid-column:span 7;min-width:280px">
+        <div style="border-top:1px solid rgba(0,23,31,0.16);padding:18px 0;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap"><div style="font-family:ui-monospace,Menlo,monospace;font-size:14px;color:#6b7b82">[Position title]</div><div style="font-family:ui-monospace,Menlo,monospace;font-size:13px;color:#6b7b82">[office] · [closing date]</div></div>
+        <div style="border-top:1px solid rgba(0,23,31,0.16);padding:18px 0;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap"><div style="font-family:ui-monospace,Menlo,monospace;font-size:14px;color:#6b7b82">[Position title]</div><div style="font-family:ui-monospace,Menlo,monospace;font-size:13px;color:#6b7b82">[office] · [closing date]</div></div>
+        <div style="border-top:1px solid rgba(0,23,31,0.16);border-bottom:1px solid rgba(0,23,31,0.16);padding:18px 0;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap"><div style="font-family:ui-monospace,Menlo,monospace;font-size:14px;color:#6b7b82">[Position title]</div><div style="font-family:ui-monospace,Menlo,monospace;font-size:13px;color:#6b7b82">[office] · [closing date]</div></div>
+        <p style="font-size:16.5px;line-height:1.75;color:#28383f;margin:28px 0 0;max-width:66ch">Applications may be made in English or French. Send a curriculum vitae and a short covering letter to <span style="font-family:ui-monospace,Menlo,monospace;font-size:14px;color:#6b7b82">[recruitment email]</span>, stating the office and practice that interest you.</p>
+      </div>
+    </div>
+  </section>
+</div>
+</sc-if>
+
+<!-- CONTACT -->
+<sc-if value="{{ isContact }}" hint-placeholder-val="{{ false }}">
+<div>
+  <section style="max-width:1360px;margin:0 auto;padding:clamp(48px,7vw,104px) clamp(20px,5vw,80px) clamp(32px,4vw,48px)">
+    <div style="font-size:11px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:#007EA7;margin-bottom:28px">Contact</div>
+    <h1 style="font-family:Spectral,Georgia,serif;font-weight:300;font-size:clamp(36px,5vw,64px);line-height:1.08;letter-spacing:-0.02em;margin:0;max-width:20ch">Three offices, two languages</h1>
+    <p style="font-size:17px;line-height:1.7;color:#38484f;max-width:64ch;margin:28px 0 0">Enquiries may be made in English or French. / Les demandes peuvent être adressées en anglais ou en français.</p>
+  </section>
+  <hr style="border:0;border-top:1px solid rgba(0,23,31,0.14);margin:0" />
+  <section style="max-width:1360px;margin:0 auto;padding:clamp(40px,5vw,64px) clamp(20px,5vw,80px)">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(28px,3vw,44px)">
+      <div style="border-top:2px solid #00171F;padding-top:20px">
+        <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:24px;margin:0 0 6px">Douala</h2>
+        <div style="font-size:13px;color:#007EA7;margin-bottom:16px">Head office</div>
+        <p style="margin:0;font-family:ui-monospace,Menlo,monospace;font-size:13.5px;line-height:1.85;color:#6b7b82">[Building, street]<br />[Quarter, Douala]<br />[Postal box]<br />[+237 telephone]</p>
+      </div>
+      <div style="border-top:1px solid rgba(0,23,31,0.2);padding-top:20px">
+        <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:24px;margin:0 0 6px">Buea</h2>
+        <div style="font-size:13px;color:#4a5a61;margin-bottom:16px">Southwest Region</div>
+        <p style="margin:0;font-family:ui-monospace,Menlo,monospace;font-size:13.5px;line-height:1.85;color:#6b7b82">[Building, street]<br />[Quarter, Buea]<br />[Postal box]<br />[+237 telephone]</p>
+      </div>
+      <div style="border-top:1px solid rgba(0,23,31,0.2);padding-top:20px">
+        <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:24px;margin:0 0 16px">Our lawyers</h2>
+        <div style="display:grid;gap:14px;font-size:14.5px;line-height:1.5">
+          <div><div style="color:#00171F">Francisca E. Abunaw</div><a href="mailto:francisca.abunaw@abunawlaw.com">francisca.abunaw@abunawlaw.com</a></div>
+          <div><div style="color:#00171F">Orock Kelly Agbor</div><a href="mailto:kelly.orock@abunawlaw.com">kelly.orock@abunawlaw.com</a></div>
+          <div><div style="color:#00171F">Orock Donaldson Agbor</div><a href="mailto:donaldson.agbor@abunawlaw.com">donaldson.agbor@abunawlaw.com</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <hr style="border:0;border-top:1px solid rgba(0,23,31,0.14);margin:0" />
+  <section style="max-width:1360px;margin:0 auto;padding:clamp(40px,5vw,72px) clamp(20px,5vw,80px) clamp(56px,7vw,96px)">
+    <div style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(28px,3vw,48px)">
+      <div style="grid-column:span 4;min-width:240px">
+        <h2 style="font-family:Spectral,Georgia,serif;font-weight:400;font-size:clamp(24px,2.6vw,32px);line-height:1.2;margin:0 0 22px;max-width:16ch">Make an enquiry</h2>
+        <div style="border-top:1px solid rgba(0,23,31,0.16);padding-top:16px">
+          <h3 style="font-size:13px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;margin:0 0 10px">Before you write</h3>
+          <p style="margin:0 0 14px;font-size:14.5px;line-height:1.7;color:#4a5a61">Sending this form does not create a lawyer-client relationship, and the firm owes you no duty until we have completed a conflict check and confirmed our engagement in writing.</p>
+          <p style="margin:0;font-size:14.5px;line-height:1.7;color:#4a5a61">Please do not send confidential or time-sensitive information in a first enquiry. Give us enough to identify the parties and run the conflict check, and no more.</p>
+        </div>
+      </div>
+      <form onSubmit="{{ onSubmit }}" style="grid-column:span 7;min-width:280px;display:grid;gap:22px">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:22px">
+          <label style="display:grid;gap:8px"><span style="font-size:13px;font-weight:500;letter-spacing:0.04em;color:#00171F">Name</span><input type="text" style="border:0;border-bottom:1px solid rgba(0,23,31,0.3);padding:10px 0;font-size:15.5px;color:#00171F;background:none;outline:none" /></label>
+          <label style="display:grid;gap:8px"><span style="font-size:13px;font-weight:500;letter-spacing:0.04em;color:#00171F">Organisation</span><input type="text" style="border:0;border-bottom:1px solid rgba(0,23,31,0.3);padding:10px 0;font-size:15.5px;color:#00171F;background:none;outline:none" /></label>
+          <label style="display:grid;gap:8px"><span style="font-size:13px;font-weight:500;letter-spacing:0.04em;color:#00171F">Email</span><input type="email" style="border:0;border-bottom:1px solid rgba(0,23,31,0.3);padding:10px 0;font-size:15.5px;color:#00171F;background:none;outline:none" /></label>
+          <label style="display:grid;gap:8px"><span style="font-size:13px;font-weight:500;letter-spacing:0.04em;color:#00171F">Telephone</span><input type="tel" style="border:0;border-bottom:1px solid rgba(0,23,31,0.3);padding:10px 0;font-size:15.5px;color:#00171F;background:none;outline:none" /></label>
+          <label style="display:grid;gap:8px"><span style="font-size:13px;font-weight:500;letter-spacing:0.04em;color:#00171F">Preferred language</span><select style="border:0;border-bottom:1px solid rgba(0,23,31,0.3);padding:10px 0;font-size:15.5px;color:#00171F;background:none;outline:none"><option>English</option><option>Français</option></select></label>
+          <label style="display:grid;gap:8px"><span style="font-size:13px;font-weight:500;letter-spacing:0.04em;color:#00171F">Practice area</span><select style="border:0;border-bottom:1px solid rgba(0,23,31,0.3);padding:10px 0;font-size:15.5px;color:#00171F;background:none;outline:none"><option>Corporate &amp; Commercial</option><option>Corporate Compliance &amp; Governance</option><option>Succession &amp; Probate</option><option>Real Estate &amp; Land Law</option><option>Labour &amp; Employment Law</option><option>Family Law</option><option>Criminal Litigation</option><option>Human Rights Law</option><option>Consumer Protection</option><option>Legal Translation</option><option>Other</option></select></label>
+        </div>
+        <label style="display:grid;gap:8px"><span style="font-size:13px;font-weight:500;letter-spacing:0.04em;color:#00171F">Other parties involved — required for the conflict check</span><input type="text" placeholder="Counterparties, related companies or opposing parties" style="border:0;border-bottom:1px solid rgba(0,23,31,0.3);padding:10px 0;font-size:15.5px;color:#00171F;background:none;outline:none" /></label>
+        <label style="display:grid;gap:8px"><span style="font-size:13px;font-weight:500;letter-spacing:0.04em;color:#00171F">Your enquiry</span><textarea rows="5" style="border:1px solid rgba(0,23,31,0.3);padding:12px;font-size:15.5px;line-height:1.6;color:#00171F;background:none;outline:none;resize:vertical"></textarea></label>
+        <label style="display:flex;gap:12px;align-items:flex-start"><input type="checkbox" style="margin-top:4px;width:16px;height:16px;accent-color:#007EA7" /><span style="font-size:14px;line-height:1.65;color:#4a5a61;max-width:62ch">I understand that sending this enquiry does not create a lawyer-client relationship, that the firm must complete a conflict check before accepting instructions, and that I should not send confidential information at this stage.</span></label>
+        <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+          <button type="submit" style="background:#00171F;color:#FFFFFF;border:0;padding:14px 28px;cursor:pointer;font-size:14px;font-weight:500;letter-spacing:0.04em">Send enquiry</button>
+          <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;color:#007EA7">Demonstration form — no message was sent.</span></sc-if>
+        </div>
+      </form>
+    </div>
+  </section>
+</div>
+</sc-if>
+
+</main>
+
+<footer style="background:#00171F;color:#FFFFFF">
+  <div style="max-width:1360px;margin:0 auto;padding:clamp(48px,6vw,80px) clamp(20px,5vw,80px) clamp(28px,3vw,40px)">
+    <div style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px">
+      <div style="grid-column:span 5;min-width:240px">
+        <div style="font-family:Spectral,Georgia,serif;font-size:22px;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:16px">Abunaw &amp; Associates</div>
+        <p style="margin:0;font-size:15px;line-height:1.7;color:rgba(255,255,255,0.72);max-width:44ch">Advocates and legal consultants. Douala · Buea. Working in English and French.</p>
+      </div>
+      <div style="grid-column:span 2;min-width:150px">
+        <div style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#00A8E8;margin-bottom:14px">Practices</div>
+        <div style="display:flex;flex-direction:column;gap:9px;align-items:flex-start">
+          <button onClick="{{ goCorporate }}" style="background:none;border:0;padding:0;cursor:pointer;font-size:14px;color:rgba(255,255,255,0.86);text-align:left">Corporate &amp; Commercial</button>
+          <button onClick="{{ goCompliance }}" style="background:none;border:0;padding:0;cursor:pointer;font-size:14px;color:rgba(255,255,255,0.86);text-align:left">Compliance &amp; Governance</button>
+          <button onClick="{{ goLand }}" style="background:none;border:0;padding:0;cursor:pointer;font-size:14px;color:rgba(255,255,255,0.86);text-align:left">Real Estate &amp; Land Law</button>
+          <button onClick="{{ goEstate }}" style="background:none;border:0;padding:0;cursor:pointer;font-size:14px;color:rgba(255,255,255,0.86);text-align:left">Succession &amp; Probate</button>
+        </div>
+      </div>
+      <div style="grid-column:span 2;min-width:150px">
+        <div style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#00A8E8;margin-bottom:14px">Firm</div>
+        <div style="display:flex;flex-direction:column;gap:9px;align-items:flex-start">
+          <button onClick="{{ goPeople }}" style="background:none;border:0;padding:0;cursor:pointer;font-size:14px;color:rgba(255,255,255,0.86);text-align:left">People</button>
+          <button onClick="{{ goAbout }}" style="background:none;border:0;padding:0;cursor:pointer;font-size:14px;color:rgba(255,255,255,0.86);text-align:left">About</button>
+          <button onClick="{{ goInsights }}" style="background:none;border:0;padding:0;cursor:pointer;font-size:14px;color:rgba(255,255,255,0.86);text-align:left">Insights</button>
+          <button onClick="{{ goCareers }}" style="background:none;border:0;padding:0;cursor:pointer;font-size:14px;color:rgba(255,255,255,0.86);text-align:left">Careers</button>
+        </div>
+      </div>
+      <div style="grid-column:span 3;min-width:180px">
+        <div style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#00A8E8;margin-bottom:14px">Enquiries</div>
+        <p style="margin:0 0 14px;font-family:ui-monospace,Menlo,monospace;font-size:13px;line-height:1.8;color:rgba(255,255,255,0.72)">[+237 telephone]<br />[email address]</p>
+        <button onClick="{{ goContact }}" style="background:none;border:1px solid rgba(255,255,255,0.4);color:#FFFFFF;padding:10px 16px;cursor:pointer;font-size:13.5px;font-weight:500">Contact</button>
+      </div>
+    </div>
+    <div style="margin-top:clamp(36px,4vw,56px);padding-top:22px;border-top:1px solid rgba(255,255,255,0.22);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap">
+      <p style="margin:0;font-size:12.5px;line-height:1.7;color:rgba(255,255,255,0.6);max-width:78ch">© Abunaw &amp; Associates. This website is general information about the firm and its practice areas. It is not legal advice, and no lawyer-client relationship arises from its use. Bracketed text marks content awaiting supply by the firm.</p>
+      <p style="margin:0;font-size:12.5px;color:rgba(255,255,255,0.6)">English · Français</p>
+    </div>
+  </div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showLangToggle&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Site&quot;},&quot;revealOnScroll&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Site&quot;}}">
+class Component extends DCLogic {
+  state = { page: "home", lang: "en", sent: false, bio: "f" };
+
+  go(p) {
+    this.setState({ page: p, sent: false });
+  }
+
+  componentDidMount() { this._lastPage = this.state.page; this.observe(); }
+
+  componentDidUpdate() {
+    if (this._lastPage === this.state.page) return;
+    this._lastPage = this.state.page;
+    const id = this.anchor; this.anchor = null;
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      const el = id ? document.getElementById(id) : null;
+      const top = el ? el.getBoundingClientRect().top + window.scrollY - 100 : 0;
+      window.scrollTo({ top, behavior: "instant" });
+      this.observe();
+    }));
+  }
+
+  observe() {
+    if (this.props.revealOnScroll === false) return;
+    if (typeof IntersectionObserver === "undefined") return;
+    requestAnimationFrame(() => {
+      if (this.io) this.io.disconnect();
+      this.io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.style.opacity = "1";
+            e.target.style.transform = "none";
+            this.io.unobserve(e.target);
+          }
+        });
+      }, { rootMargin: "0px 0px -8% 0px" });
+      document.querySelectorAll("[data-reveal]").forEach((n) => {
+        const r = n.getBoundingClientRect();
+        if (r.top > window.innerHeight * 0.92) {
+          n.style.opacity = "0";
+          n.style.transform = "translateY(14px)";
+          n.style.transition = "opacity 700ms ease, transform 700ms ease";
+        }
+        this.io.observe(n);
+      });
+    });
+  }
+
+  renderVals() {
+    const page = this.state.page;
+    const en = this.state.lang === "en";
+    return {
+      isHome: page === "home",
+      isPractices: page === "practices",
+      isCorporate: page === "corporate",
+      isLand: page === "land",
+      isEstate: page === "estate",
+      isPeople: page === "people",
+      isBioF: page === "bio" && this.state.bio === "f",
+      isBioK: page === "bio" && this.state.bio === "k",
+      isBioD: page === "bio" && this.state.bio === "d",
+      isAbout: page === "about",
+      isInsights: page === "insights",
+      isArticle: page === "article",
+      isCareers: page === "careers",
+      isContact: page === "contact",
+      isEn: en,
+      isFr: !en,
+      enColor: en ? "#00171F" : "#9aa7ad",
+      frColor: en ? "#9aa7ad" : "#00171F",
+      showLang: this.props.showLangToggle !== false,
+      sent: this.state.sent,
+      setEn: () => this.setState({ lang: "en" }),
+      setFr: () => this.setState({ lang: "fr" }),
+      goHome: () => this.go("home"),
+      goPractices: () => this.go("practices"),
+      goCorporate: () => this.go("corporate"),
+      goCompliance: () => { this.anchor = "regulatory"; this.go("corporate"); },
+      goLand: () => this.go("land"),
+      goEstate: () => this.go("estate"),
+      goPeople: () => this.go("people"),
+      goFrancisca: () => { this.setState({ bio: "f" }); this.go("bio"); },
+      goKelly: () => { this.setState({ bio: "k" }); this.go("bio"); },
+      goDonaldson: () => { this.setState({ bio: "d" }); this.go("bio"); },
+      goAbout: () => this.go("about"),
+      goInsights: () => this.go("insights"),
+      goArticle: () => this.go("article"),
+      goCareers: () => this.go("careers"),
+      goContact: () => this.go("contact"),
+      onSubmit: (e) => { e.preventDefault(); this.setState({ sent: true }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

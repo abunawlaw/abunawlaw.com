@@ -1,0 +1,73 @@
+:root {
+  --ink: #00171F;
+  --navy: #003459;
+  --accent: #007EA7;
+  --accent-bright: #00A8E8;
+  --white: #FFFFFF;
+  --body: #28383f;
+  --body-2: #38484f;
+  --muted: #4a5a61;
+  --faint: #6b7b82;
+  --disabled: #9aa7ad;
+  --rule: rgba(0, 23, 31, 0.14);
+  --rule-strong: rgba(0, 23, 31, 0.2);
+  --rule-dark: rgba(255, 255, 255, 0.28);
+  --font-display: Spectral, Georgia, serif;
+  --font-ui: Archivo, Helvetica, sans-serif;
+  --font-mono: ui-monospace, Menlo, monospace;
+  --header-h: 78px;
+  --gutter: clamp(20px, 5vw, 80px);
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 22px); }
+body { margin: 0; background: var(--white); color: var(--ink); font-family: var(--font-ui); -webkit-font-smoothing: antialiased; }
+* { box-sizing: border-box; }
+img { display: block; height: auto; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+::selection { background: var(--accent-bright); color: var(--white); }
+input, textarea, select, button { font-family: var(--font-ui); }
+summary::-webkit-details-marker { display: none; }
+:focus-visible { outline: 2px solid var(--accent-bright); outline-offset: 3px; }
+
+/* Links converted from the prototype's buttons keep their inline styling. */
+a.lnk { display: inline-block; text-decoration: none; }
+a.lnk:hover { text-decoration: none; opacity: 0.8; }
+a.card { display: block; text-decoration: none; }
+a.card:hover { text-decoration: none; opacity: 1; }
+a.card:hover h2, a.card:hover h3 { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+
+/* Reveal on scroll: hidden state is only applied by JS when motion is allowed. */
+.reveal-pending { opacity: 0; transform: translateY(14px); }
+.reveal-anim { transition: opacity 700ms ease, transform 700ms ease; }
+
+.skip-link { position: absolute; left: -9999px; top: 0; z-index: 100; background: var(--ink); color: var(--white); padding: 10px 16px; }
+.skip-link:focus { left: 16px; top: 16px; color: var(--white); }
+
+/* Contact form states */
+.field-error { font-size: 12.5px; color: #b3261e; min-height: 0; }
+input[aria-invalid="true"], select[aria-invalid="true"], textarea[aria-invalid="true"] { border-color: #b3261e !important; }
+
+/* The prototype's 12-column grids use inline styles; collapse them to one column on small screens. */
+@media (max-width: 760px) {
+  [style*="grid-template-columns:repeat(12"] { grid-template-columns: minmax(0, 1fr) !important; }
+  [style*="grid-template-columns:repeat(12"] > * { grid-column: auto !important; min-width: 0 !important; }
+  aside[style*="position:sticky"] { position: static !important; padding-bottom: 0 !important; }
+}
+
+/* Card grids with fixed column steps, so a row never ends with a lone card or an empty column. */
+.grid-people, .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 1100px) {
+  .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 860px) {
+  .grid-3 { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 640px) {
+  .grid-people { grid-template-columns: minmax(0, 1fr); max-width: 420px; }
+}
+@media (max-width: 560px) {
+  .grid-4 { grid-template-columns: minmax(0, 1fr); }
+}
+.grid-3 a { overflow-wrap: anywhere; }
